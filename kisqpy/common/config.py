@@ -1,33 +1,30 @@
 """Client configuration."""
 
-
 import os
 
-
-DB_NAME = "hotel"
-"""Application database name."""
+from kisqpy.common import constants
 
 
-DBAPI = "postgresql"
+DBAPI = constants.DBAPI_POSTGRES
 """Database API."""
 
 
-_DB_URI_TPL = "{schema}+{driver}://{user}:{password}@{host}:{port}/{dbname}"
+DB_URI_TPL = "{schema}+{driver}://{user}:{password}@{host}:{port}/{dbname}"
 """Database URI template."""
 
 
-_DB_URIS = {
-    "postgresql": {
-        "schema": "postgresql",
-        "driver": "psycopg2",
+DB_URIS = {
+    constants.DBAPI_POSTGRES: {
+        "schema": constants.DBAPI_POSTGRES,
+        "driver": constants.DBDRIVER_PSYCOPG2,
         "user": os.environ["USER"],
         "password": os.environ.get("KISQPY_DB_PASS", ""),
         "host": os.environ.get("KISQPY_DB_HOST", "localhost"),
         "port": int(os.environ.get("KISQPY_DB_PORT", 5432)),
-        "dbname": DB_NAME
+        "dbname": constants.DB_NAME
     }
 }
 
 
-DB_URI = _DB_URI_TPL.format(**_DB_URIS[DBAPI])
+DB_URI = DB_URI_TPL.format(**DB_URIS[DBAPI])
 """Database Unified Resource Locator."""

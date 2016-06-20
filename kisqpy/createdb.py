@@ -3,7 +3,6 @@
 """Create initial database scheme."""
 
 import argparse
-import sys
 
 from sqlalchemy import (
     create_engine,
