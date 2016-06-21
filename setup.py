@@ -11,5 +11,7 @@ setup(
     entry_points="""
     [console_scripts]
     kisctl = kisqpy.createdb:main
+    [gui_scripts]
+    kisclient = kisqpy.client:main
     """
 )
