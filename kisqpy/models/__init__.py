@@ -46,7 +46,7 @@ class Client(Base):
     birthdate = Column(Date, nullable=False)
     city = Column(String(64), nullable=False)
     street = Column(String(64), nullable=False)
-    phone = Column(String(16), nullable=False)
+    phone = Column(String(32), nullable=False)
 
 
 class ClientTicketMap(Base):
