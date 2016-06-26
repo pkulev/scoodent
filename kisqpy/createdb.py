@@ -3,12 +3,15 @@
 """Create initial database scheme."""
 
 import argparse
+import sys
 
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, MetaData
 from sqlalchemy.orm import sessionmaker
 
 from kisqpy.common import config
-from kisqpy.models import Base, Client, Address
+from kisqpy.models import (
+    Base, Client, ClientTicketMap, Departure, Organisation, Place, Ticket
+)
 
 
 def create_scheme(args):
@@ -17,8 +20,20 @@ def create_scheme(args):
     if not args.yes:
         return
 
-    engine = create_engine(config.DB_URI)
+    engine = create_engine(config.DB_URI, echo=config.DEBUG)
     Base.metadata.create_all(engine)
+
+
+def delete_scheme(args):
+    """Delete scheme."""
+
+    if not args.yes:
+        return
+
+    engine = create_engine(config.DB_URI, echo=config.DEBUG)
+    meta = MetaData(engine)
+    meta.reflect()
+    meta.drop_all()
 
 
 def create_testing(args):
@@ -27,7 +42,7 @@ def create_testing(args):
     if not args.yes:
         return
 
-    engine = create_engine(config.DB_URI)
+    engine = create_engine(config.DB_URI, echo=config.DEBUG)
     Base.metadata.bind = engine
     DBSession = sessionmaker(bind=engine)
     session = DBSession()
@@ -53,6 +68,10 @@ def parse_args():
     sub_scheme.add_argument("--yes", action="store_true", help="really create")
     sub_scheme.set_defaults(func=create_scheme)
 
+    sub_delete_scheme = subparsers.add_parser("dropall", help="drop all tables")
+    sub_delete_scheme.add_argument("--yes", action="store_true", help="really drop")
+    sub_delete_scheme.set_defaults(func=delete_scheme)
+
     sub_testing = subparsers.add_parser("testing", help="fill DB by some data")
     sub_testing.add_argument(
         "--yes", action="store_true", help="really create")
@@ -66,4 +85,7 @@ def main():
     """Entry point."""
 
     args = parse_args()
-    args.func(args)
+    if "func" in args:
+        args.func(args)
+    else:
+        sys.exit("Invalid command")

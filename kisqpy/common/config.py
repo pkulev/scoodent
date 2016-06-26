@@ -5,6 +5,10 @@ import os
 from kisqpy.common import constants
 
 
+DEBUG = True
+"""Global debug mode."""
+
+
 DBAPI = constants.DBAPI_POSTGRES
 """Database API."""
 
