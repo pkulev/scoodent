@@ -3,6 +3,7 @@
 """Create initial database scheme."""
 
 import argparse
+import json
 import sys
 
 from sqlalchemy import create_engine, MetaData
@@ -47,12 +48,31 @@ def create_testing(args):
     DBSession = sessionmaker(bind=engine)
     session = DBSession()
 
-    new_client = Client(first_name="Tasty", last_name="Tester")
-    session.add(new_client)
-    session.commit()
+    with open(config.MOCK["client"], "r") as source:
+        clients = json.load(source)
 
-    session.add(Address(post_code="00000", client=new_client))
-    session.commit()
+    with open(config.MOCK["place"], "r") as source:
+        places = json.load(source)
+
+    with open(config.MOCK["organisation"], "r") as source:
+        organisations = json.load(source)
+
+    for organisation in organisations:
+        session.add(Organisation(**organisation))
+        session.commit()
+
+    for client in clients:
+        new_client = Client(**client)
+        session.add(new_client)
+        session.commit()
+
+
+    # new_client = Client(first_name="Tasty", last_name="Tester")
+    # session.add(new_client)
+    # session.commit()
+
+    # session.add(Address(post_code="00000", client=new_client))
+    # session.commit()
 
 
 def parse_args():

@@ -1,7 +1,9 @@
 """Client configuration."""
 
 import os
+from functools import partial
 
+import kisqpy
 from kisqpy.common import constants
 
 
@@ -28,7 +30,22 @@ DB_URIS = {
         "dbname": constants.DB_NAME
     }
 }
+"""Database URI config."""
 
 
 DB_URI = DB_URI_TPL.format(**DB_URIS[DBAPI])
 """Database Unified Resource Locator."""
+
+
+ROOT = os.path.dirname(kisqpy.__file__)
+"""Project's root path."""
+
+MOCK_DIR = partial(os.path.join, os.path.join(ROOT, "mocks"))
+"""Helper partial."""
+
+MOCK = {
+    "client": MOCK_DIR("client.json"),
+    "place": MOCK_DIR("place.json"),
+    "organisation": MOCK_DIR("organisation.json"),
+}
+"""Table <-> path to json mock mapping."""
