@@ -2,3 +2,4 @@ Cython
 SQLAlchemy
 psycopg2
 kivy==1.9.1
+enum

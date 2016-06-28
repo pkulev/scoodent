@@ -1,19 +1,32 @@
 """Kisqpy models."""
 
+import enum
+from decimal import Decimal
+
 from sqlalchemy import (
-    Column, Date, DateTime, Enum, ForeignKey, Integer, String, Text
+    Column, Date, Enum, ForeignKey, Integer, String, Text
 )
 from sqlalchemy.types import UserDefinedType
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
 
 
-__all__ = ["Base", "Client", "Address"]
-
-
 Base = declarative_base()
 
-Category = Enum("half-lux", "lux", "appartaments", name="category")
+
+class CategoryEnum(enum.Enum):
+    """Represents category enum type."""
+
+    half_lux = "half-lux"
+    lux = "lux"
+    appartaments = "appartaments"
+
+
+Category = Enum(
+    CategoryEnum.half_lux,
+    CategoryEnum.lux,
+    CategoryEnum.appartaments,
+    name="category")
 
 
 class Money(UserDefinedType):
@@ -29,7 +42,7 @@ class Money(UserDefinedType):
                 sign = "-"
             else:
                 trimpoint = 1
-                sigh = ""
+                sign = ""
 
             return Decimal(sign + value[trimpoint:].replace(",", ""))
         return process
