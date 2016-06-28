@@ -21,7 +21,7 @@ def get_appartaments(client_num, places, total):
     else:
         cat = CategoryEnum.appartaments
 
-    return random.choice(filter(lambda it: it["cat"] == cat, places))
+    return random.choice(list(filter(lambda it: it["cat"] == cat, places)))
 
 
 def get_cost(category, days=1):

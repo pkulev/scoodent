@@ -1,6 +1,6 @@
 """Kisqpy models."""
 
-import enum
+from collections import namedtuple
 from decimal import Decimal
 
 from sqlalchemy import (
@@ -14,13 +14,11 @@ from sqlalchemy.orm import relationship
 Base = declarative_base()
 
 
-class CategoryEnum(enum.Enum):
-    """Represents category enum type."""
+_Category = namedtuple("CategoryEnumType", ["half_lux", "lux", "appartaments"])
+"""Represents Category enum type."""
 
-    half_lux = "half-lux"
-    lux = "lux"
-    appartaments = "appartaments"
-
+CategoryEnum = _Category("half-lux", "lux", "appartaments")
+"""Category mapping."""
 
 Category = Enum(
     CategoryEnum.half_lux,
