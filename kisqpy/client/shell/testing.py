@@ -15,13 +15,14 @@ def get_appartaments(client_num, places, total):
     percent = client_num * total / 100
 
     if 0 <= percent <= 50:
-        cat = CategoryEnum.half_lux
+        category = CategoryEnum.half_lux
     elif 50 < percent <= 90:
-        cat = CategoryEnum.lux
+        category = CategoryEnum.lux
     else:
-        cat = CategoryEnum.appartaments
+        category = CategoryEnum.appartaments
 
-    return random.choice(list(filter(lambda it: it["cat"] == cat, places)))
+    return random.choice(
+        list(filter(lambda it: it["category"] == category, places)))
 
 
 def get_cost(category, days=1):
@@ -64,6 +65,11 @@ def get_departure_date(client_num, incoming_date, total):
     return incoming_date + timedelta(days=days)
 
 
+def get_real_departure_date(ticket, client_num, total):
+    percent = client_num * total / 100
+    # TODO: implement
+
+
 def generate_data(session):
 
     with open(config.MOCK["place"], "r") as source:
@@ -101,7 +107,7 @@ def generate_data(session):
         ticket_fields = {
             "place_id": appartaments["id"],
             "order_date": get_random_date(start_date, today),
-            "cost": get_cost(appartaments["cat"], get_departure_days(
+            "cost": get_cost(appartaments["category"], get_departure_days(
                 client_counter, len(clients)))
         }
 
@@ -116,6 +122,8 @@ def generate_data(session):
         if client_counter % 5 == 0:
             ticket_fields["org_id"] = random.choice(organisations)["id"]
 
+        new_ticket = Ticket(**ticket_fields)
+
         # table allocation
         ticket_fields["table_num"] = current_table
         current_table_free -= 1
@@ -123,8 +131,15 @@ def generate_data(session):
             current_table_free = table_capacity
             current_table += 1
 
+        # departure table generation
+        departure_fields = {
+            "client_id": new_client.id,
+            "ticket_id": new_ticket.id,
+            #"incoming_date":
+        }
+
         session.add(new_client)
-        session.add(Ticket(**ticket_fields))
+        session.add(new_ticket)
         session.commit()
 
     # new_client = Client(first_name="Tasty", last_name="Tester")
@@ -133,4 +148,3 @@ def generate_data(session):
 
     # session.add(Address(post_code="00000", client=new_client))
     # session.commit()
-

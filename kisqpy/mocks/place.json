@@ -1,50 +1,751 @@
-[{"id":1,"name":"LBEL Couleur luxe rouge irresistible maximum hydration SPF 17","room":45,"cat":"appartaments"},
-{"id":2,"name":"Phentermine Hydrochloride","room":44,"cat":"half-lux"},
-{"id":3,"name":"COLESTIPOL HYDROCHLORIDE","room":31,"cat":"half-lux"},
-{"id":4,"name":"NasalAsalt","room":44,"cat":"half-lux"},
-{"id":5,"name":"Tizanidine","room":20,"cat":"lux"},
-{"id":6,"name":"Valsartan and Hydrochlorothiazide","room":41,"cat":"half-lux"},
-{"id":7,"name":"Normosol-R","room":37,"cat":"half-lux"},
-{"id":8,"name":"Oxygen","room":14,"cat":"appartaments"},
-{"id":9,"name":"Antibacterial Hand Sanitizer","room":33,"cat":"half-lux"},
-{"id":10,"name":"Docusol Kids","room":14,"cat":"lux"},
-{"id":11,"name":"Ultravist","room":36,"cat":"half-lux"},
-{"id":12,"name":"Tramadol Hydrochloride and Acetaminophen","room":38,"cat":"appartaments"},
-{"id":13,"name":"Vitalizer Laser Aid BB","room":5,"cat":"lux"},
-{"id":14,"name":"Doxycycline","room":32,"cat":"half-lux"},
-{"id":15,"name":"Dry Idea A.Dry Antiperspirant Solid Unscented","room":1,"cat":"appartaments"},
-{"id":16,"name":"LISINOPRIL","room":27,"cat":"appartaments"},
-{"id":17,"name":"ORGAN-I NR","room":25,"cat":"appartaments"},
-{"id":18,"name":"Cold and Cough High Blood Pressure","room":41,"cat":"appartaments"},
-{"id":19,"name":"Allergy Relief","room":11,"cat":"appartaments"},
-{"id":20,"name":"azithromycin","room":20,"cat":"half-lux"},
-{"id":21,"name":"QUERCUS RUBRA POLLEN","room":11,"cat":"half-lux"},
-{"id":22,"name":"Oxymorphone hydrochloride","room":32,"cat":"appartaments"},
-{"id":23,"name":"DG Health Cold Head Congestion","room":32,"cat":"half-lux"},
-{"id":24,"name":"NEO-POLYCIN","room":1,"cat":"lux"},
-{"id":25,"name":"Quinapril","room":29,"cat":"appartaments"},
-{"id":26,"name":"Sodium Phosphates","room":30,"cat":"appartaments"},
-{"id":27,"name":"Fexofenadine Hydrochloride","room":31,"cat":"appartaments"},
-{"id":28,"name":"Hydralazine Hydrochloride","room":3,"cat":"lux"},
-{"id":29,"name":"Cyclobenzaprine Hydrochloride","room":27,"cat":"half-lux"},
-{"id":30,"name":"QUERCUS VIRGINIANA POLLEN","room":49,"cat":"appartaments"},
-{"id":31,"name":"Meijer Extra Strength Cold and Hot Medicated","room":43,"cat":"lux"},
-{"id":32,"name":"Lemon Zest Antibacterial Foaming Hand Wash","room":19,"cat":"half-lux"},
-{"id":33,"name":"Corn Grass","room":38,"cat":"appartaments"},
-{"id":34,"name":"Arthritis Joints","room":38,"cat":"lux"},
-{"id":35,"name":"PLAGENTRA MOTHERS BELLY","room":21,"cat":"half-lux"},
-{"id":36,"name":"Olanzapine","room":37,"cat":"appartaments"},
-{"id":37,"name":"Simvastatin","room":23,"cat":"lux"},
-{"id":38,"name":"Calendula ex herba 6 Special Order","room":3,"cat":"lux"},
-{"id":39,"name":"Cilostazol","room":28,"cat":"appartaments"},
-{"id":40,"name":"Softlips Coconut","room":49,"cat":"half-lux"},
-{"id":41,"name":"Gelato Topical Anesthetic","room":19,"cat":"lux"},
-{"id":42,"name":"Gelato Topical Anesthetic","room":11,"cat":"appartaments"},
-{"id":43,"name":"ROBITUSSIN LINGERING COLD LONG-ACTING COUGHGELS","room":8,"cat":"lux"},
-{"id":44,"name":"ENALAPRIL MALEATE","room":26,"cat":"lux"},
-{"id":45,"name":"Melaleuca Pollen","room":49,"cat":"half-lux"},
-{"id":46,"name":"Glipizide","room":46,"cat":"appartaments"},
-{"id":47,"name":"Lil Drug Store Anti-Diarrheal","room":14,"cat":"lux"},
-{"id":48,"name":"Midazolam Hydrochloride","room":43,"cat":"lux"},
-{"id":49,"name":"TRETIN.X","room":15,"cat":"appartaments"},
-{"id":50,"name":"BLATELLA GERMANICA","room":42,"cat":"half-lux"}]
+[{
+  "id": 1,
+  "name": "Queen",
+  "room": 1,
+  "category": "half-lux"
+}, {
+  "id": 2,
+  "name": "Queen",
+  "room": 2,
+  "category": "half-lux"
+}, {
+  "id": 3,
+  "name": "Queen",
+  "room": 3,
+  "category": "half-lux"
+}, {
+  "id": 4,
+  "name": "Queen",
+  "room": 4,
+  "category": "half-lux"
+}, {
+  "id": 5,
+  "name": "Queen",
+  "room": 5,
+  "category": "half-lux"
+}, {
+  "id": 6,
+  "name": "Queen",
+  "room": 6,
+  "category": "half-lux"
+}, {
+  "id": 7,
+  "name": "Queen",
+  "room": 7,
+  "category": "half-lux"
+}, {
+  "id": 8,
+  "name": "Queen",
+  "room": 8,
+  "category": "half-lux"
+}, {
+  "id": 9,
+  "name": "Queen",
+  "room": 9,
+  "category": "half-lux"
+}, {
+  "id": 10,
+  "name": "Queen",
+  "room": 10,
+  "category": "half-lux"
+}, {
+  "id": 11,
+  "name": "Queen",
+  "room": 11,
+  "category": "half-lux"
+}, {
+  "id": 12,
+  "name": "Queen",
+  "room": 12,
+  "category": "half-lux"
+}, {
+  "id": 13,
+  "name": "Queen",
+  "room": 13,
+  "category": "half-lux"
+}, {
+  "id": 14,
+  "name": "Queen",
+  "room": 14,
+  "category": "half-lux"
+}, {
+  "id": 15,
+  "name": "Queen",
+  "room": 15,
+  "category": "half-lux"
+}, {
+  "id": 16,
+  "name": "Queen",
+  "room": 16,
+  "category": "half-lux"
+}, {
+  "id": 17,
+  "name": "Queen",
+  "room": 17,
+  "category": "half-lux"
+}, {
+  "id": 18,
+  "name": "Queen",
+  "room": 18,
+  "category": "half-lux"
+}, {
+  "id": 19,
+  "name": "Queen",
+  "room": 19,
+  "category": "half-lux"
+}, {
+  "id": 20,
+  "name": "Queen",
+  "room": 20,
+  "category": "half-lux"
+}, {
+  "id": 21,
+  "name": "Queen",
+  "room": 21,
+  "category": "lux"
+}, {
+  "id": 22,
+  "name": "Queen",
+  "room": 22,
+  "category": "lux"
+}, {
+  "id": 23,
+  "name": "Queen",
+  "room": 23,
+  "category": "lux"
+}, {
+  "id": 24,
+  "name": "Queen",
+  "room": 24,
+  "category": "lux"
+}, {
+  "id": 25,
+  "name": "Queen",
+  "room": 25,
+  "category": "lux"
+}, {
+  "id": 26,
+  "name": "Queen",
+  "room": 26,
+  "category": "lux"
+}, {
+  "id": 27,
+  "name": "Queen",
+  "room": 27,
+  "category": "lux"
+}, {
+  "id": 28,
+  "name": "Queen",
+  "room": 28,
+  "category": "lux"
+}, {
+  "id": 29,
+  "name": "Queen",
+  "room": 29,
+  "category": "lux"
+}, {
+  "id": 30,
+  "name": "Queen",
+  "room": 30,
+  "category": "lux"
+}, {
+  "id": 31,
+  "name": "Queen",
+  "room": 31,
+  "category": "lux"
+}, {
+  "id": 32,
+  "name": "Queen",
+  "room": 32,
+  "category": "lux"
+}, {
+  "id": 33,
+  "name": "Queen",
+  "room": 33,
+  "category": "lux"
+}, {
+  "id": 34,
+  "name": "Queen",
+  "room": 34,
+  "category": "lux"
+}, {
+  "id": 35,
+  "name": "Queen",
+  "room": 35,
+  "category": "lux"
+}, {
+  "id": 36,
+  "name": "Queen",
+  "room": 36,
+  "category": "lux"
+}, {
+  "id": 37,
+  "name": "Queen",
+  "room": 37,
+  "category": "lux"
+}, {
+  "id": 38,
+  "name": "Queen",
+  "room": 38,
+  "category": "lux"
+}, {
+  "id": 39,
+  "name": "Queen",
+  "room": 39,
+  "category": "lux"
+}, {
+  "id": 40,
+  "name": "Queen",
+  "room": 40,
+  "category": "lux"
+}, {
+  "id": 41,
+  "name": "Queen",
+  "room": 41,
+  "category": "appartaments"
+}, {
+  "id": 42,
+  "name": "Queen",
+  "room": 42,
+  "category": "appartaments"
+}, {
+  "id": 43,
+  "name": "Queen",
+  "room": 43,
+  "category": "appartaments"
+}, {
+  "id": 44,
+  "name": "Queen",
+  "room": 44,
+  "category": "appartaments"
+}, {
+  "id": 45,
+  "name": "Queen",
+  "room": 45,
+  "category": "appartaments"
+}, {
+  "id": 46,
+  "name": "Queen",
+  "room": 46,
+  "category": "appartaments"
+}, {
+  "id": 47,
+  "name": "Queen",
+  "room": 47,
+  "category": "appartaments"
+}, {
+  "id": 48,
+  "name": "Queen",
+  "room": 48,
+  "category": "appartaments"
+}, {
+  "id": 49,
+  "name": "Queen",
+  "room": 49,
+  "category": "appartaments"
+}, {
+  "id": 50,
+  "name": "Queen",
+  "room": 50,
+  "category": "appartaments"
+}, {
+  "id": 51,
+  "name": "Queen",
+  "room": 1,
+  "category": "half-lux"
+}, {
+  "id": 52,
+  "name": "Queen",
+  "room": 2,
+  "category": "half-lux"
+}, {
+  "id": 53,
+  "name": "Queen",
+  "room": 3,
+  "category": "half-lux"
+}, {
+  "id": 54,
+  "name": "Queen",
+  "room": 4,
+  "category": "half-lux"
+}, {
+  "id": 55,
+  "name": "Royal",
+  "room": 5,
+  "category": "half-lux"
+}, {
+  "id": 56,
+  "name": "Royal",
+  "room": 6,
+  "category": "half-lux"
+}, {
+  "id": 57,
+  "name": "Royal",
+  "room": 7,
+  "category": "half-lux"
+}, {
+  "id": 58,
+  "name": "Royal",
+  "room": 8,
+  "category": "half-lux"
+}, {
+  "id": 59,
+  "name": "Royal",
+  "room": 9,
+  "category": "half-lux"
+}, {
+  "id": 60,
+  "name": "Royal",
+  "room": 10,
+  "category": "half-lux"
+}, {
+  "id": 61,
+  "name": "Royal",
+  "room": 11,
+  "category": "half-lux"
+}, {
+  "id": 62,
+  "name": "Royal",
+  "room": 12,
+  "category": "half-lux"
+}, {
+  "id": 63,
+  "name": "Royal",
+  "room": 13,
+  "category": "half-lux"
+}, {
+  "id": 64,
+  "name": "Royal",
+  "room": 14,
+  "category": "half-lux"
+}, {
+  "id": 65,
+  "name": "Royal",
+  "room": 15,
+  "category": "half-lux"
+}, {
+  "id": 66,
+  "name": "Royal",
+  "room": 16,
+  "category": "half-lux"
+}, {
+  "id": 67,
+  "name": "Royal",
+  "room": 17,
+  "category": "half-lux"
+}, {
+  "id": 68,
+  "name": "Royal",
+  "room": 18,
+  "category": "half-lux"
+}, {
+  "id": 69,
+  "name": "Royal",
+  "room": 19,
+  "category": "half-lux"
+}, {
+  "id": 70,
+  "name": "Royal",
+  "room": 20,
+  "category": "half-lux"
+}, {
+  "id": 71,
+  "name": "Royal",
+  "room": 21,
+  "category": "lux"
+}, {
+  "id": 72,
+  "name": "Royal",
+  "room": 22,
+  "category": "lux"
+}, {
+  "id": 73,
+  "name": "Royal",
+  "room": 23,
+  "category": "lux"
+}, {
+  "id": 74,
+  "name": "Royal",
+  "room": 24,
+  "category": "lux"
+}, {
+  "id": 75,
+  "name": "Royal",
+  "room": 25,
+  "category": "lux"
+}, {
+  "id": 76,
+  "name": "Royal",
+  "room": 26,
+  "category": "lux"
+}, {
+  "id": 77,
+  "name": "Royal",
+  "room": 27,
+  "category": "lux"
+}, {
+  "id": 78,
+  "name": "Royal",
+  "room": 28,
+  "category": "lux"
+}, {
+  "id": 79,
+  "name": "Royal",
+  "room": 29,
+  "category": "lux"
+}, {
+  "id": 80,
+  "name": "Royal",
+  "room": 30,
+  "category": "lux"
+}, {
+  "id": 81,
+  "name": "Royal",
+  "room": 31,
+  "category": "lux"
+}, {
+  "id": 82,
+  "name": "Royal",
+  "room": 32,
+  "category": "lux"
+}, {
+  "id": 83,
+  "name": "Royal",
+  "room": 33,
+  "category": "lux"
+}, {
+  "id": 84,
+  "name": "Royal",
+  "room": 34,
+  "category": "lux"
+}, {
+  "id": 85,
+  "name": "Royal",
+  "room": 35,
+  "category": "lux"
+}, {
+  "id": 86,
+  "name": "Royal",
+  "room": 36,
+  "category": "lux"
+}, {
+  "id": 87,
+  "name": "Royal",
+  "room": 37,
+  "category": "lux"
+}, {
+  "id": 88,
+  "name": "Royal",
+  "room": 38,
+  "category": "lux"
+}, {
+  "id": 89,
+  "name": "Royal",
+  "room": 39,
+  "category": "lux"
+}, {
+  "id": 90,
+  "name": "Royal",
+  "room": 40,
+  "category": "lux"
+}, {
+  "id": 91,
+  "name": "Royal",
+  "room": 41,
+  "category": "appartaments"
+}, {
+  "id": 92,
+  "name": "Royal",
+  "room": 42,
+  "category": "appartaments"
+}, {
+  "id": 93,
+  "name": "Royal",
+  "room": 43,
+  "category": "appartaments"
+}, {
+  "id": 94,
+  "name": "Royal",
+  "room": 44,
+  "category": "appartaments"
+}, {
+  "id": 95,
+  "name": "Royal",
+  "room": 45,
+  "category": "appartaments"
+}, {
+  "id": 96,
+  "name": "Royal",
+  "room": 46,
+  "category": "appartaments"
+}, {
+  "id": 97,
+  "name": "Royal",
+  "room": 47,
+  "category": "appartaments"
+}, {
+  "id": 98,
+  "name": "Royal",
+  "room": 48,
+  "category": "appartaments"
+}, {
+  "id": 99,
+  "name": "Royal",
+  "room": 49,
+  "category": "appartaments"
+}, {
+  "id": 100,
+  "name": "Royal",
+  "room": 50,
+  "category": "appartaments"
+}, {
+  "id": 101,
+  "name": "Queen",
+  "room": 1,
+  "category": "half-lux"
+}, {
+  "id": 102,
+  "name": "Queen",
+  "room": 2,
+  "category": "half-lux"
+}, {
+  "id": 103,
+  "name": "Queen",
+  "room": 3,
+  "category": "half-lux"
+}, {
+  "id": 104,
+  "name": "Queen",
+  "room": 4,
+  "category": "half-lux"
+}, {
+  "id": 105,
+  "name": "Queen",
+  "room": 5,
+  "category": "half-lux"
+}, {
+  "id": 106,
+  "name": "Queen",
+  "room": 6,
+  "category": "half-lux"
+}, {
+  "id": 107,
+  "name": "Queen",
+  "room": 7,
+  "category": "half-lux"
+}, {
+  "id": 108,
+  "name": "Queen",
+  "room": 8,
+  "category": "half-lux"
+}, {
+  "id": 109,
+  "name": "Queen",
+  "room": 9,
+  "category": "half-lux"
+}, {
+  "id": 110,
+  "name": "Queen",
+  "room": 10,
+  "category": "half-lux"
+}, {
+  "id": 111,
+  "name": "Queen",
+  "room": 11,
+  "category": "half-lux"
+}, {
+  "id": 112,
+  "name": "Queen",
+  "room": 12,
+  "category": "half-lux"
+}, {
+  "id": 113,
+  "name": "Queen",
+  "room": 13,
+  "category": "half-lux"
+}, {
+  "id": 114,
+  "name": "Palace",
+  "room": 14,
+  "category": "half-lux"
+}, {
+  "id": 115,
+  "name": "Palace",
+  "room": 15,
+  "category": "half-lux"
+}, {
+  "id": 116,
+  "name": "Palace",
+  "room": 16,
+  "category": "half-lux"
+}, {
+  "id": 117,
+  "name": "Palace",
+  "room": 17,
+  "category": "half-lux"
+}, {
+  "id": 118,
+  "name": "Palace",
+  "room": 18,
+  "category": "half-lux"
+}, {
+  "id": 119,
+  "name": "Palace",
+  "room": 19,
+  "category": "half-lux"
+}, {
+  "id": 120,
+  "name": "Palace",
+  "room": 20,
+  "category": "half-lux"
+}, {
+  "id": 121,
+  "name": "Palace",
+  "room": 21,
+  "category": "lux"
+}, {
+  "id": 122,
+  "name": "Palace",
+  "room": 22,
+  "category": "lux"
+}, {
+  "id": 123,
+  "name": "Palace",
+  "room": 23,
+  "category": "lux"
+}, {
+  "id": 124,
+  "name": "Palace",
+  "room": 24,
+  "category": "lux"
+}, {
+  "id": 125,
+  "name": "Palace",
+  "room": 25,
+  "category": "lux"
+}, {
+  "id": 126,
+  "name": "Palace",
+  "room": 26,
+  "category": "lux"
+}, {
+  "id": 127,
+  "name": "Palace",
+  "room": 27,
+  "category": "lux"
+}, {
+  "id": 128,
+  "name": "Palace",
+  "room": 28,
+  "category": "lux"
+}, {
+  "id": 129,
+  "name": "Palace",
+  "room": 29,
+  "category": "lux"
+}, {
+  "id": 130,
+  "name": "Palace",
+  "room": 30,
+  "category": "lux"
+}, {
+  "id": 131,
+  "name": "Palace",
+  "room": 31,
+  "category": "lux"
+}, {
+  "id": 132,
+  "name": "Palace",
+  "room": 32,
+  "category": "lux"
+}, {
+  "id": 133,
+  "name": "Palace",
+  "room": 33,
+  "category": "lux"
+}, {
+  "id": 134,
+  "name": "Palace",
+  "room": 34,
+  "category": "lux"
+}, {
+  "id": 135,
+  "name": "Palace",
+  "room": 35,
+  "category": "lux"
+}, {
+  "id": 136,
+  "name": "Palace",
+  "room": 36,
+  "category": "lux"
+}, {
+  "id": 137,
+  "name": "Palace",
+  "room": 37,
+  "category": "lux"
+}, {
+  "id": 138,
+  "name": "Palace",
+  "room": 38,
+  "category": "lux"
+}, {
+  "id": 139,
+  "name": "Palace",
+  "room": 39,
+  "category": "lux"
+}, {
+  "id": 140,
+  "name": "Palace",
+  "room": 40,
+  "category": "lux"
+}, {
+  "id": 141,
+  "name": "Palace",
+  "room": 41,
+  "category": "appartaments"
+}, {
+  "id": 142,
+  "name": "Palace",
+  "room": 42,
+  "category": "appartaments"
+}, {
+  "id": 143,
+  "name": "Palace",
+  "room": 43,
+  "category": "appartaments"
+}, {
+  "id": 144,
+  "name": "Palace",
+  "room": 44,
+  "category": "appartaments"
+}, {
+  "id": 145,
+  "name": "Palace",
+  "room": 45,
+  "category": "appartaments"
+}, {
+  "id": 146,
+  "name": "Palace",
+  "room": 46,
+  "category": "appartaments"
+}, {
+  "id": 147,
+  "name": "Palace",
+  "room": 47,
+  "category": "appartaments"
+}, {
+  "id": 148,
+  "name": "Palace",
+  "room": 48,
+  "category": "appartaments"
+}, {
+  "id": 149,
+  "name": "Palace",
+  "room": 49,
+  "category": "appartaments"
+}, {
+  "id": 150,
+  "name": "Palace",
+  "room": 50,
+  "category": "appartaments"
+}]

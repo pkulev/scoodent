@@ -70,6 +70,7 @@ class ClientTicketMap(Base):
 
 
 class Departure(Base):
+    """Departure DAO representation."""
 
     __tablename__ = "departure"
 
@@ -82,6 +83,7 @@ class Departure(Base):
 
 
 class Organisation(Base):
+    """Organisation DAO representation."""
 
     __tablename__ = "organisation"
 
@@ -90,22 +92,24 @@ class Organisation(Base):
 
 
 class Place(Base):
+    """Place DAO representation."""
 
     __tablename__ = "place"
 
     id = Column(Integer, primary_key=True, unique=True)
     name = Column(String(64), nullable=False)
     room = Column(Integer, nullable=False)
-    cat = Column(Category, nullable=False)
+    category = Column(Category, nullable=False)
 
 
 class Ticket(Base):
+    """Ticket DAO representation."""
 
     __tablename__ = "ticket"
 
     id = Column(Integer, primary_key=True, unique=True)
-    org_id = Column(Integer, ForeignKey("organisation.id"), unique=True)
-    place_id = Column(Integer, ForeignKey("place.id"), unique=True)
+    org_id = Column(Integer, ForeignKey("organisation.id"))
+    place_id = Column(Integer, ForeignKey("place.id"))
     order_date = Column(Date, nullable=False)
     incoming_date = Column(Date, nullable=False)
     departure_date = Column(Date, nullable=False)
