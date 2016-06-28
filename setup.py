@@ -10,8 +10,8 @@ setup(
     packages=find_packages(),
     entry_points="""
     [console_scripts]
-    kisctl = kisqpy.createdb:main
+    kisctl = kisqpy.client.shell.__main__:main
     [gui_scripts]
-    kisclient = kisqpy.client:main
+    kisclient = kisqpy.client.gui.__main__:main
     """
 )
