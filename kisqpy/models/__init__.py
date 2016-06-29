@@ -52,8 +52,8 @@ class Client(Base):
     __tablename__ = "client"
 
     id = Column(Integer, primary_key=True, unique=True)
-    name = Column(String(64), nullable=False)
     surname = Column(String(64), nullable=False)
+    name = Column(String(64), nullable=False)
     birthdate = Column(Date, nullable=False)
     city = Column(String(64), nullable=False)
     street = Column(String(64), nullable=False)

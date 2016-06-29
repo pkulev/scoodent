@@ -88,14 +88,13 @@ def generate_data(session):
         session.commit()
 
     client_counter = 0
+    current_table = 1
+    table_capacity = 4
+    current_table_free = table_capacity
 
     for client in clients:
         new_client = Client(**client)
         client_counter += 1
-
-        current_table = 1
-        table_capacity = 4
-        current_table_free = table_capacity
 
         start_date = date.today().replace(month=date.today().month - 2)
         today = date.today()
@@ -122,14 +121,14 @@ def generate_data(session):
         if client_counter % 5 == 0:
             ticket_fields["org_id"] = random.choice(organisations)["id"]
 
-        new_ticket = Ticket(**ticket_fields)
-
         # table allocation
         ticket_fields["table_num"] = current_table
         current_table_free -= 1
         if current_table_free == 0:
             current_table_free = table_capacity
             current_table += 1
+
+        new_ticket = Ticket(**ticket_fields)
 
         # departure table generation
         departure_fields = {
