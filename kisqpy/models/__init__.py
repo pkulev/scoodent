@@ -67,6 +67,8 @@ class ClientTicketMap(Base):
 
     client_id = Column(Integer, ForeignKey("client.id"), primary_key=True, unique=True)
     ticket_id = Column(Integer, ForeignKey("ticket.id"), primary_key=True, unique=True)
+    client = relationship("Client")
+    ticket = relationship("Ticket")
 
 
 class Departure(Base):
