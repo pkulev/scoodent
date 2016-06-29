@@ -6,16 +6,10 @@ class LoginScreen(GridLayout):
     """Login screen widget."""
 
     def __init__(self, **kwargs):
+#        f_username =
         super(LoginScreen, self).__init__(**kwargs)
-        self.cols = 2
 
 
 class ClientApp(App):
     def build(self):
         return LoginScreen()
-
-
-def main():
-    """Entry point."""
-
-    ClientApp().run()

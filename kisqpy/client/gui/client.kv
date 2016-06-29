@@ -1,18 +1,33 @@
 #:kivy 1.9.1
 
 <LoginScreen>:
-    size: 100, 100
+    f_username: username
+    f_password: password
 
-    Label:
-        text: "Username"
+    GridLayout:
+        rows: 3
+        cols: 2
+        padding: 10
+        spacing: 10
 
-    TextInput:
-        password: True
-        multiline: False
+        Label:
+            text: "Username:"
 
-    Label:
-        text: "Password"
+        TextInput:
+            id: username
+            multiline: False
+            on_focus: self.insert_text("Focus" if args[1] else "No focus")
 
-    TextInput:
-        multiline: False
-        
+        Label:
+            id: password
+            text: "Password:"
+
+        TextInput:
+            password: True
+            multiline: False
+
+        Button:
+            text: "{0}".format(self.state)
+
+        Button:
+            text: "Cancel"
