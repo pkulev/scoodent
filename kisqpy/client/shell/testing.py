@@ -5,7 +5,7 @@ from datetime import date, timedelta
 
 from kisqpy.common import config
 from kisqpy.models import (
-    CategoryEnum, Client, ClientTicketMap, Departure,
+    CategoryEnum, Client, Departure,
     Organisation, Place, Ticket
 )
 
@@ -135,7 +135,7 @@ def generate_data(session):
 
         # order date = random date from (today - 2 month) until now
         ticket_fields = {
-#            "client": client,
+            "client": client,
             "place": appartaments,
             "order_date": get_random_date(start_date, today),
             "cost": get_cost(
@@ -164,30 +164,20 @@ def generate_data(session):
 
         # departure table generation
         departure_fields = {
-            "client": client,
             "ticket": ticket,
             "departure_date": get_real_departure_date(ticket, current_percent)
         }
 
         if current_percent <= 3:
             departure_fields["incoming_date"] = None
-            departure_fields["early_dep_reason"] = "did not come"
+            departure_fields["early_departure_reason"] = "did not come"
         elif current_percent <= 15:
-            departure_fields["early_dep_reason"] = "circumstances"
+            departure_fields["early_departure_reason"] = "circumstances"
             departure_fields["incoming_date"] = ticket.incoming_date
         else:
             departure_fields["incoming_date"] = ticket.incoming_date
 
         session.add(client)
-        session.commit()
         session.add(ticket)
         session.add(Departure(**departure_fields))
-        session.commit()
-        session.add(ClientTicketMap(client=client, ticket=ticket))
-        session.commit()
-    # client = Client(first_name="Tasty", last_name="Tester")
-    # session.add(client)
-    # session.commit()
-
-    # session.add(Address(post_code="00000", client=client))
-    # session.commit()
+    session.commit()

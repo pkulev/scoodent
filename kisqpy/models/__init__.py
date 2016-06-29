@@ -50,23 +50,12 @@ class Client(Base):
     __tablename__ = "client"
 
     id = Column(Integer, primary_key=True, unique=True)
-    surname = Column(String(64), nullable=False)
     name = Column(String(64), nullable=False)
+    surname = Column(String(64), nullable=False)
     birthdate = Column(Date, nullable=False)
     city = Column(String(64), nullable=False)
     street = Column(String(64), nullable=False)
     phone = Column(String(32), nullable=False)
-
-
-class ClientTicketMap(Base):
-    """Client room mapping."""
-
-    __tablename__ = "client_ticket_map"
-
-    client_id = Column(Integer, ForeignKey("client.id"), primary_key=True, unique=True)
-    ticket_id = Column(Integer, ForeignKey("ticket.id"), primary_key=True, unique=True)
-    client = relationship("Client")
-    ticket = relationship("Ticket")
 
 
 class Departure(Base):
@@ -75,12 +64,10 @@ class Departure(Base):
     __tablename__ = "departure"
 
     id = Column(Integer, primary_key=True, unique=True)
-    client_id = Column(Integer, ForeignKey("client.id"), unique=True)
     ticket_id = Column(Integer, ForeignKey("ticket.id"), unique=True)
     incoming_date = Column(Date)
     departure_date = Column(Date)
-    early_dep_reason = Column(Text)
-    client = relationship("Client")
+    early_departure_reason = Column(Text)
     ticket = relationship("Ticket")
 
 
@@ -110,12 +97,14 @@ class Ticket(Base):
     __tablename__ = "ticket"
 
     id = Column(Integer, primary_key=True, unique=True)
+    client_id = Column(Integer, ForeignKey("client.id"), nullable=False)
     org_id = Column(Integer, ForeignKey("organisation.id"))
-    place_id = Column(Integer, ForeignKey("place.id"))
+    place_id = Column(Integer, ForeignKey("place.id"), nullable=False)
     order_date = Column(Date, nullable=False)
     incoming_date = Column(Date, nullable=False)
     departure_date = Column(Date, nullable=False)
     table_num = Column(Integer, nullable=False)
     cost = Column(Money, nullable=False)
+    client = relationship("Client")
     organisation = relationship("Organisation")
     place = relationship("Place")
