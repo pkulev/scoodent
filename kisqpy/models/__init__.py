@@ -7,11 +7,9 @@ from sqlalchemy import (
     Column, Date, Enum, ForeignKey, Integer, String, Text
 )
 from sqlalchemy.types import UserDefinedType
-from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
 
-
-Base = declarative_base()
+from kisqpy.common.db import Base
 
 
 _Category = namedtuple("CategoryEnumType", ["half_lux", "lux", "appartaments"])

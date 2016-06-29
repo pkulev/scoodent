@@ -40,7 +40,7 @@ def create_testing(args):
     if not args.yes:
         return
 
-    testing.generate_data(db.get_session(Base))
+    testing.generate_data(db.get_session())
 
 
 # TODO: refactor

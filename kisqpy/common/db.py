@@ -1,20 +1,25 @@
 """DB utils and helpers."""
 
 from sqlalchemy import create_engine
+from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 
 from kisqpy.common import config
 
 
+Base = declarative_base()
+
+
 def get_engine(debug=None):
     """Return ORM engine."""
 
-    return create_engine(config.DB_URI, echo=debug or config.DEBUG)
+    debug = config.DEBUG if debug is None else debug
+    return create_engine(config.DB_URI, echo=debug)
 
 
-def get_session(base, debug=None):
+def get_session(debug=None):
     """Return DB session."""
 
     engine = get_engine(debug)
-    base.metadata.bind = engine
+    Base.metadata.bind = engine
     return sessionmaker(bind=engine)()
