@@ -80,6 +80,8 @@ class Departure(Base):
     incoming_date = Column(Date)
     departure_date = Column(Date)
     early_dep_reason = Column(Text)
+    client = relationship("Client")
+    ticket = relationship("Ticket")
 
 
 class Organisation(Base):
@@ -115,3 +117,5 @@ class Ticket(Base):
     departure_date = Column(Date, nullable=False)
     table_num = Column(Integer, nullable=False)
     cost = Column(Money, nullable=False)
+    organisation = relationship("Organisation")
+    place = relationship("Place")

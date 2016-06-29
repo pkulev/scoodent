@@ -135,7 +135,8 @@ def generate_data(session):
 
         # order date = random date from (today - 2 month) until now
         ticket_fields = {
-            "place_id": appartaments.id,
+#            "client": client,
+            "place": appartaments,
             "order_date": get_random_date(start_date, today),
             "cost": get_cost(
                 appartaments.category, get_departure_days(current_percent))
@@ -150,7 +151,7 @@ def generate_data(session):
             ticket_fields["incoming_date"], current_percent)
 
         if current_client % 5 == 0:
-            ticket_fields["org_id"] = random.choice(organisations).id
+            ticket_fields["organisation"] = random.choice(organisations)
 
         # table allocation
         ticket_fields["table_num"] = current_table
@@ -163,8 +164,8 @@ def generate_data(session):
 
         # departure table generation
         departure_fields = {
-            "client_id": client.id,
-            "ticket_id": ticket.id,
+            "client": client,
+            "ticket": ticket,
             "departure_date": get_real_departure_date(ticket, current_percent)
         }
 
