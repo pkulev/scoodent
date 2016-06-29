@@ -5,12 +5,11 @@
 import argparse
 import sys
 
-from sqlalchemy import create_engine, MetaData
-from sqlalchemy.orm import sessionmaker
+from sqlalchemy import MetaData
 
-from kisqpy.common import config
-from kisqpy.models import Base
+from kisqpy.common import db
 from kisqpy.client.shell import testing
+from kisqpy.models import Base
 
 
 def create_schema(args):
@@ -19,7 +18,7 @@ def create_schema(args):
     if not args.yes:
         return
 
-    engine = create_engine(config.DB_URI, echo=config.DEBUG)
+    engine = db.get_engine()
     Base.metadata.create_all(engine)
 
 
@@ -29,7 +28,7 @@ def delete_schema(args):
     if not args.yes:
         return
 
-    engine = create_engine(config.DB_URI, echo=config.DEBUG)
+    engine = db.get_engine()
     meta = MetaData(engine)
     meta.reflect()
     meta.drop_all()
@@ -41,10 +40,7 @@ def create_testing(args):
     if not args.yes:
         return
 
-    engine = create_engine(config.DB_URI, echo=config.DEBUG)
-    Base.metadata.bind = engine
-    DBSession = sessionmaker(bind=engine)
-    testing.generate_data(DBSession())
+    testing.generate_data(db.get_session(Base))
 
 
 # TODO: refactor
