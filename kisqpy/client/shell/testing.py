@@ -5,7 +5,8 @@ from datetime import date, timedelta
 
 from kisqpy.common import config
 from kisqpy.models import (
-    Client, CategoryEnum, Departure, Organisation, Place, Ticket
+    CategoryEnum, Client, ClientTicketMap, Departure,
+    Organisation, Place, Ticket
 )
 
 
@@ -181,7 +182,8 @@ def generate_data(session):
         session.add(ticket)
         session.add(Departure(**departure_fields))
         session.commit()
-
+        session.add(ClientTicketMap(client=client, ticket=ticket))
+        session.commit()
     # client = Client(first_name="Tasty", last_name="Tester")
     # session.add(client)
     # session.commit()
