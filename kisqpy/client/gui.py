@@ -1,9 +1,11 @@
 """GUI widgets."""
 
+import datetime
+
 from PyQt4 import QtCore, QtGui, uic
 
 from kisqpy.common import db, config
-from kisqpy.models import Client
+from kisqpy.models import Client, Ticket, Departure
 
 
 class DeleteDialog(QtGui.QDialog):
@@ -25,11 +27,11 @@ class MainWindow(QtGui.QMainWindow):
         self.pb_showTable.clicked.connect(self.showTable)
 
         self.rb_client.clicked.connect(self.rb_to_pb_client)
-        self.rb_creator.clicked.connect(self.rb_to_pb_creator)
-        self.rb_project.clicked.connect(self.rb_to_pb_project)
+        self.rb_ticket.clicked.connect(self.rb_to_pb_ticket)
+        self.rb_departure.clicked.connect(self.rb_to_pb_departure)
 
         # add to DB callbacks
-        self.pb_addClient.clicked.connect(self.addClientToDB)
+        self.pb_addClient.clicked.connect(self.add_client)
         self.pb_addCreator.clicked.connect(self.addCreatorToDB)
         self.pb_addProject.clicked.connect(self.addProjectToDB)
         # remove from DB callbacks
@@ -47,140 +49,78 @@ class MainWindow(QtGui.QMainWindow):
         self.cur = None
         self.data = None
 
+    @staticmethod
+    def insert_objects(obj):
+        """Insert object or objects to DB."""
 
-    def insert_to_db(obj):
-        #if isinstance(obj, [tuple, list
-        pass
-
-    # Database features
-    def connectToDB(self, db, usr):
-        """db and usr are strings. If all is OK links to conn connection object"""
-        try:
-            self.conn = ps2.connect(database=db, user=usr)
-        except ps2.DatabaseError as e:
-            QtGui.QMessageBox.warning(None, "Error", str(e))
-            return False
+        session = db.get_session()
+        if isinstance(obj, (tuple, list)):
+            session.add_all(obj)
         else:
-            return True
-
-    def disconnect(self):
-        """if connection is open - closes it, otherwise prints message"""
-        if self.conn.closed:
-            print("Already closed")
-        else:
-            self.conn.close()
+            session.merge(obj)
+        session.commit()
 
     def showTable(self):
-        def getTableChoise(self):
+        def get_table_choise():
             choises = {
-                self.rb_client: "client",
-                self.rb_creator: "creator",
-                self.rb_project: "project",
+                self.rb_client: Client,
+                self.rb_ticket: Ticket,
+                self.rb_departure: Departure,
             }
 
             for rb, res in choises.items():
                 if rb.isChecked():
                     return res
 
-        def extractColumnNames(self, table):
-            """Extract column names from table.
+        def column_names(model):
+            """Extract column names from table."""
 
-            Table is string from which table is needed to extract names
-            returns list of column names.
-            """
+            return model.__table__.columns.keys()
 
-            query = """SELECT column_name FROM information_schema.columns
-                       WHERE table_name = {t}""".format(t=repr(table))
-            cur = self.conn.cursor()
-            cur.execute(query)
-            tupledList = cur.fetchall()
-            resList = []
-            for i in tupledList:
-                resList.append(i[0])
-            resList.reverse()
-            return resList
-
-        def replaceIDs(self, cur_table):
-#            query = """SELECT idj from
-            pass
-
-        # connect to DB and get table and column labels
-        self.connectToDB("model", "most")
-        cur = self.conn.cursor()
-        cur_what = "*"
-        cur_table = getTableChoise(self)
-        query = "SELECT {0} FROM {1};".format(cur_what, cur_table)
-        cur.execute(query)
-        data = cur.fetchall()
-        names = extractColumnNames(self, cur_table)
-        self.disconnect()
+        session = db.get_session()
+        model = get_table_choise()
+        names = column_names(model)
+        data = list(session.query(model))
 
         lines = len(data)
-        columns = len(data[0])
+        columns = len(names)
         self.tableWidget.setSortingEnabled(True)
         self.tableWidget.setRowCount(lines)
         self.tableWidget.setColumnCount(columns)
-
         self.tableWidget.setHorizontalHeaderLabels(names)
+
         for i in range(lines):
             for j in range(columns):
-                decoded = data[i][j]
-                decoded = str(decoded).decode("utf-8")
-                item = QtGui.QTableWidgetItem(decoded)
+                item = QtGui.QTableWidgetItem(str(data[i].__dict__[names[j]]))
                 self.tableWidget.setItem(i, j, item)
         self.tableWidget.sortByColumn(0, QtCore.Qt.AscendingOrder)
 
-    # radiobuttons features
     def rb_to_pb_client(self):
         self.pb_showTable.setText("Show client table")
 
-    def rb_to_pb_creator(self):
-        self.pb_showTable.setText("Show creator table")
+    def rb_to_pb_ticket(self):
+        self.pb_showTable.setText("Show ticket table")
 
-    def rb_to_pb_project(self):
-        self.pb_showTable.setText("Show project table")
+    def rb_to_pb_departure(self):
+        self.pb_showTable.setText("Show departure table")
 
-    def addClientToDB(self):
-        class Client:
-            pass
+    def add_client(self):
+        client = {
+            "name": str(self.le_clientName.text()),
+            "surname": str(self.le_clientSurname.text()),
+            "birthdate": datetime.date(2016, 6, 12),
+            "city": str(self.le_clientCity.text()),
+            "street": str(self.le_clientStreet.text()),
+            "phone": str(self.le_clientPhone.text()),
+        }
 
-        Client.Surname = str(self.le_clientSurname.text())
-        Client.Name = str(self.le_clientName.text())
-        Client.Address = str(self.le_clientAddress.text())
-        Client.Email = str(self.le_clientEmail.text())
-        Client.Phone = str(self.le_clientPhone.text())
-
-        if any(
-            field == ""
-            for field in [
-                Client.Surname,
-                Client.Name,
-                Client.Address,
-                Client.Email,
-                Client.Phone,
-            ]):
+        if not all(client.values()):
             QtGui.QMessageBox.warning(
-                self,
-                "Error",
+                self, "Error",
                 "One or more fields are empty!")
         else:
-            query = """INSERT INTO client (surname, name, address, email, phone)
-                       VALUES ({s}, {n}, {a}, {e}, {p});
-                    """.format(s=repr(Client.Surname), n=repr(Client.Name),
-                               a=repr(Client.Address), e=repr(Client.Email),
-                               p=repr(Client.Phone))
-            try:
-                self.connectToDB("model", "most")
-                cur = self.conn.cursor()
-                cur.execute(query)
-                self.conn.commit()
-
-            except ps2.DatabaseError as e:
-                if self.conn:
-                    self.conn.rollback()
-                    QtGui.QMessageBox.warning(self, "Error", str(e))
-            finally:
-                self.disconnect()
+            #self.insert_objects(Client(**client))
+            db.get_session().merge(Client(**client))
 
     def addCreatorToDB(self):
         class Creator:

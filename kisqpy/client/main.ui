@@ -40,7 +40,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="tab">
      <attribute name="title">
@@ -76,18 +76,11 @@
         <rect>
          <x>10</x>
          <y>30</y>
-         <width>139</width>
-         <height>241</height>
+         <width>178</width>
+         <height>191</height>
         </rect>
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_6">
-        <item>
-         <widget class="QLabel" name="label_9">
-          <property name="text">
-           <string>ID сотрудника</string>
-          </property>
-         </widget>
-        </item>
         <item>
          <widget class="QLabel" name="label_10">
           <property name="text">
@@ -98,42 +91,28 @@
         <item>
          <widget class="QLabel" name="label_11">
           <property name="text">
-           <string>Дата открытия</string>
+           <string>Дата заезда</string>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QLabel" name="label_12">
           <property name="text">
-           <string>Дата закрытия</string>
+           <string>Дата отбытия</string>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QLabel" name="label_13">
           <property name="text">
-           <string>Затраченное время</string>
+           <string>Номер стола</string>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QLabel" name="label_14">
           <property name="text">
-           <string>ПО для создания</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLabel" name="label_15">
-          <property name="text">
-           <string>ПО для рендера</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLabel" name="label_16">
-          <property name="text">
-           <string>Вид заказа</string>
+           <string>Тип номера</string>
           </property>
          </widget>
         </item>
@@ -145,13 +124,10 @@
          <x>160</x>
          <y>30</y>
          <width>181</width>
-         <height>260</height>
+         <height>191</height>
         </rect>
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_7">
-        <item>
-         <widget class="QLineEdit" name="le_projectCreatorID"/>
-        </item>
         <item>
          <widget class="QLineEdit" name="le_projectClientID"/>
         </item>
@@ -196,65 +172,17 @@
          <widget class="QComboBox" name="cb_projectCreationProg">
           <item>
            <property name="text">
-            <string>Blender</string>
+            <string>Полулюкс</string>
            </property>
           </item>
           <item>
            <property name="text">
-            <string>Maya</string>
+            <string>Люкс</string>
            </property>
           </item>
           <item>
            <property name="text">
-            <string>3ds Max</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>Houdini</string>
-           </property>
-          </item>
-         </widget>
-        </item>
-        <item>
-         <widget class="QComboBox" name="cb_projectRenderProg">
-          <item>
-           <property name="text">
-            <string>RenderMan</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>MentalRay</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>V-Ray</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>DreamScape</string>
-           </property>
-          </item>
-         </widget>
-        </item>
-        <item>
-         <widget class="QComboBox" name="cb_projectSendForm">
-          <item>
-           <property name="text">
-            <string>Model</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>Animation</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>Pictures</string>
+            <string>Аппартаменты</string>
            </property>
           </item>
          </widget>
@@ -272,29 +200,22 @@
        </rect>
       </property>
       <property name="title">
-       <string>Добавить сотрудника</string>
+       <string>ДОбавить организацию</string>
       </property>
       <widget class="QWidget" name="layoutWidget_2">
        <property name="geometry">
         <rect>
          <x>0</x>
          <y>30</y>
-         <width>81</width>
-         <height>91</height>
+         <width>255</width>
+         <height>226</height>
         </rect>
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_3">
         <item>
          <widget class="QLabel" name="label_6">
           <property name="text">
-           <string>Фамилия</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLabel" name="label_7">
-          <property name="text">
-           <string>Имя</string>
+           <string>Название</string>
           </property>
          </widget>
         </item>
@@ -313,39 +234,14 @@
          <x>100</x>
          <y>30</y>
          <width>131</width>
-         <height>95</height>
+         <height>101</height>
         </rect>
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_4">
         <item>
-         <widget class="QLineEdit" name="le_creatorSurname"/>
-        </item>
-        <item>
          <widget class="QLineEdit" name="le_creatorName"/>
         </item>
-        <item>
-         <widget class="QComboBox" name="cb_creatorPosition">
-          <item>
-           <property name="text">
-            <string>3d artist</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>Modeller</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>Animator</string>
-           </property>
-          </item>
-         </widget>
-        </item>
        </layout>
-       <zorder>cb_creatorPosition</zorder>
-       <zorder>le_creatorSurname</zorder>
-       <zorder>le_creatorName</zorder>
       </widget>
       <widget class="QPushButton" name="pb_addCreator">
        <property name="geometry">
@@ -373,26 +269,13 @@
       <property name="title">
        <string>Добавить клиента</string>
       </property>
-      <widget class="QPushButton" name="pb_addClient">
-       <property name="geometry">
-        <rect>
-         <x>20</x>
-         <y>220</y>
-         <width>97</width>
-         <height>27</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>Добавить</string>
-       </property>
-      </widget>
       <widget class="QWidget" name="layoutWidget">
        <property name="geometry">
         <rect>
-         <x>100</x>
+         <x>110</x>
          <y>40</y>
          <width>261</width>
-         <height>161</height>
+         <height>201</height>
         </rect>
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -429,7 +312,24 @@
          </widget>
         </item>
         <item>
-         <widget class="QLineEdit" name="le_clientAddress">
+         <widget class="QDateEdit" name="de_clientBirthdate">
+          <property name="date">
+           <date>
+            <year>2013</year>
+            <month>1</month>
+            <day>1</day>
+           </date>
+          </property>
+          <property name="displayFormat">
+           <string>yy-MM-dd</string>
+          </property>
+          <property name="calendarPopup">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="le_clientCity">
           <property name="minimumSize">
            <size>
             <width>251</width>
@@ -445,7 +345,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QLineEdit" name="le_clientEmail">
+         <widget class="QLineEdit" name="le_clientStreet">
           <property name="minimumSize">
            <size>
             <width>251</width>
@@ -483,8 +383,8 @@
         <rect>
          <x>20</x>
          <y>40</y>
-         <width>68</width>
-         <height>161</height>
+         <width>106</width>
+         <height>201</height>
         </rect>
        </property>
        <layout class="QVBoxLayout" name="verticalLayout">
@@ -505,14 +405,21 @@
         <item>
          <widget class="QLabel" name="label_3">
           <property name="text">
-           <string>Адрес</string>
+           <string>Дата рожд.</string>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QLabel" name="label_4">
           <property name="text">
-           <string>E-mail</string>
+           <string>Город</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="label_26">
+          <property name="text">
+           <string>Улица</string>
           </property>
          </widget>
         </item>
@@ -525,6 +432,19 @@
         </item>
        </layout>
       </widget>
+     </widget>
+     <widget class="QPushButton" name="pb_addClient">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>270</y>
+        <width>97</width>
+        <height>27</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Добавить</string>
+      </property>
      </widget>
     </widget>
     <widget class="QWidget" name="tab_2">
@@ -549,7 +469,7 @@
          <x>20</x>
          <y>40</y>
          <width>151</width>
-         <height>184</height>
+         <height>186</height>
         </rect>
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_8">
@@ -599,7 +519,7 @@
        </rect>
       </property>
       <property name="title">
-       <string>Удалить сотрудника</string>
+       <string>Удалить организацию</string>
       </property>
       <widget class="QWidget" name="layoutWidget_3">
        <property name="geometry">
@@ -607,7 +527,7 @@
          <x>20</x>
          <y>40</y>
          <width>151</width>
-         <height>184</height>
+         <height>186</height>
         </rect>
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_9">
@@ -627,7 +547,7 @@
         <item>
          <widget class="QRadioButton" name="rb_delCreatorByName">
           <property name="text">
-           <string>По ФИО</string>
+           <string>По названию</string>
           </property>
          </widget>
         </item>
@@ -657,7 +577,7 @@
        </rect>
       </property>
       <property name="title">
-       <string>Удалить проект</string>
+       <string>Удалить заявку</string>
       </property>
       <widget class="QWidget" name="layoutWidget_5">
        <property name="geometry">
@@ -702,7 +622,7 @@
        </rect>
       </property>
       <property name="currentIndex">
-       <number>2</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="tab_4">
        <attribute name="title">
@@ -725,7 +645,7 @@
           <rect>
            <x>10</x>
            <y>20</y>
-           <width>117</width>
+           <width>122</width>
            <height>101</height>
           </rect>
          </property>
@@ -817,7 +737,7 @@
       </widget>
       <widget class="QWidget" name="tab_5">
        <attribute name="title">
-        <string>Сотрудник</string>
+        <string>Организация</string>
        </attribute>
        <widget class="QGroupBox" name="groupBox_8">
         <property name="geometry">
@@ -831,13 +751,13 @@
         <property name="title">
          <string>Изменить сотрудника</string>
         </property>
-        <widget class="QWidget" name="">
+        <widget class="QWidget" name="layoutWidget">
          <property name="geometry">
           <rect>
            <x>140</x>
            <y>20</y>
            <width>131</width>
-           <height>95</height>
+           <height>101</height>
           </rect>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_14">
@@ -848,17 +768,7 @@
            <widget class="QComboBox" name="cb_changeCreatorField">
             <item>
              <property name="text">
-              <string>surname</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
               <string>name</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>position</string>
              </property>
             </item>
            </widget>
@@ -868,12 +778,12 @@
           </item>
          </layout>
         </widget>
-        <widget class="QWidget" name="">
+        <widget class="QWidget" name="layoutWidget">
          <property name="geometry">
           <rect>
            <x>10</x>
            <y>20</y>
-           <width>117</width>
+           <width>122</width>
            <height>91</height>
           </rect>
          </property>
@@ -881,7 +791,7 @@
           <item>
            <widget class="QLabel" name="label_21">
             <property name="text">
-             <string>ID сотрудника</string>
+             <string>ID </string>
             </property>
            </widget>
           </item>
@@ -918,7 +828,7 @@
       </widget>
       <widget class="QWidget" name="tab_6">
        <attribute name="title">
-        <string>Проект</string>
+        <string>Тикет</string>
        </attribute>
        <widget class="QPushButton" name="pb_changeProject">
         <property name="geometry">
@@ -933,12 +843,12 @@
          <string>Изменить</string>
         </property>
        </widget>
-       <widget class="QWidget" name="">
+       <widget class="QWidget" name="layoutWidget">
         <property name="geometry">
          <rect>
           <x>10</x>
           <y>10</y>
-          <width>121</width>
+          <width>122</width>
           <height>91</height>
          </rect>
         </property>
@@ -946,7 +856,7 @@
          <item>
           <widget class="QLabel" name="label_24">
            <property name="text">
-            <string>ID проекта</string>
+            <string>ID</string>
            </property>
           </widget>
          </item>
@@ -966,13 +876,13 @@
          </item>
         </layout>
        </widget>
-       <widget class="QWidget" name="">
+       <widget class="QWidget" name="layoutWidget">
         <property name="geometry">
          <rect>
           <x>150</x>
           <y>10</y>
-          <width>131</width>
-          <height>91</height>
+          <width>135</width>
+          <height>101</height>
          </rect>
         </property>
         <layout class="QVBoxLayout" name="verticalLayout_16">
@@ -1085,7 +995,7 @@
       <x>1050</x>
       <y>500</y>
       <width>141</width>
-      <height>108</height>
+      <height>112</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout_5">
@@ -1100,16 +1010,16 @@
       </widget>
      </item>
      <item>
-      <widget class="QRadioButton" name="rb_creator">
+      <widget class="QRadioButton" name="rb_ticket">
        <property name="text">
-        <string>Creator</string>
+        <string>Ticket</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QRadioButton" name="rb_project">
+      <widget class="QRadioButton" name="rb_departure">
        <property name="text">
-        <string>Project</string>
+        <string>Departure</string>
        </property>
       </widget>
      </item>
@@ -1129,7 +1039,7 @@
      <x>0</x>
      <y>0</y>
      <width>1242</width>
-     <height>25</height>
+     <height>21</height>
     </rect>
    </property>
   </widget>
