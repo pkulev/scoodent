@@ -49,3 +49,13 @@ MOCK = {
     "organisation": MOCK_DIR("organisation.json"),
 }
 """Table <-> path to json mock mapping."""
+
+
+UI_DIR = partial(os.path.join, os.path.join(ROOT, "client"))
+"""Helper partial."""
+
+UI = {
+    "delete_dialog": UI_DIR("delete_dialog.ui"),
+    "main": UI_DIR("main.ui"),
+}
+"""Widget <-> path to .ui mapping."""

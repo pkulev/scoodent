@@ -1,1 +1,2 @@
 recursive-include kisqpy/mocks/ *
+recursive-include kisqpy/client/ *.ui

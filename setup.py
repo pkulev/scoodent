@@ -12,6 +12,6 @@ setup(
     [console_scripts]
     kisctl = kisqpy.client.shell.__main__:main
     [gui_scripts]
-    kisclient = kisqpy.client.gui.__main__:main
+    kisclient = kisqpy.client.__main__:main
     """
 )
