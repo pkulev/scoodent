@@ -1,6 +1,6 @@
-"""Kisqpy models."""
 
 from collections import namedtuple
+"""Kisqpy models."""
 from decimal import Decimal
 
 from sqlalchemy import (

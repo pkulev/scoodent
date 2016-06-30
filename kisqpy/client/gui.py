@@ -2,19 +2,28 @@
 
 import datetime
 
-from PyQt4 import QtCore, QtGui, uic
+from PyQt4 import QtGui, uic
+from PyQt4.QtCore import Qt
+from PyQt4.QtGui import QDialog, QMessageBox, QTableWidgetItem
 
 from kisqpy.common import db, config
-from kisqpy.models import Client, Ticket, Departure
+from kisqpy.models import Client, Ticket, Departure, Organisation
 
 
-class DeleteDialog(QtGui.QDialog):
+class DeleteDialog(QDialog):
+    """Represents dialog for delete confirmation."""
 
     def __init__(self, what, from_what):
-        QtGui.QDialog.__init__(self)
+        QDialog.__init__(self)
         self.msg = "Delete {w} from {f} table?".format(w=what, f=from_what)
         uic.loadUi(config.UI["delete_dialog"], self)
         self.label.setText(self.msg)
+
+
+def required_field_empty_warning(parent, msg="One or more fields are empty."):
+    """Warn user."""
+
+    QMessageBox.warning(parent, "Error", msg)
 
 
 class MainWindow(QtGui.QMainWindow):
@@ -23,31 +32,23 @@ class MainWindow(QtGui.QMainWindow):
         QtGui.QMainWindow.__init__(self)
         uic.loadUi(config.UI["main"], self)
 
-        # callbacks
-        self.pb_showTable.clicked.connect(self.showTable)
+        self.pb_showTable.clicked.connect(self.show_table)
 
         self.rb_client.clicked.connect(self.rb_to_pb_client)
         self.rb_ticket.clicked.connect(self.rb_to_pb_ticket)
         self.rb_departure.clicked.connect(self.rb_to_pb_departure)
 
-        # add to DB callbacks
         self.pb_addClient.clicked.connect(self.add_client)
-        self.pb_addCreator.clicked.connect(self.addCreatorToDB)
-        self.pb_addProject.clicked.connect(self.addProjectToDB)
-        # remove from DB callbacks
+        self.pb_addCreator.clicked.connect(self.add_ticket)
+        self.pb_addProject.clicked.connect(self.add_organisation)
+
         self.pb_delClient.clicked.connect(self.delClient)
         self.pb_delCreator.clicked.connect(self.delCreator)
         self.pb_delProject.clicked.connect(self.delProject)
-        # modify callbacks
+
         self.pb_changeClient.clicked.connect(self.changeClient)
         self.pb_changeCreator.clicked.connect(self.changeCreator)
         self.pb_changeProject.clicked.connect(self.changeProject)
-
-        # Database variables
-        self.conn = None
-        # delete if not needed
-        self.cur = None
-        self.data = None
 
     @staticmethod
     def insert_objects(obj):
@@ -60,7 +61,7 @@ class MainWindow(QtGui.QMainWindow):
             session.merge(obj)
         session.commit()
 
-    def showTable(self):
+    def show_table(self):
         def get_table_choise():
             choises = {
                 self.rb_client: Client,
@@ -91,18 +92,18 @@ class MainWindow(QtGui.QMainWindow):
 
         for i in range(lines):
             for j in range(columns):
-                item = QtGui.QTableWidgetItem(str(data[i].__dict__[names[j]]))
+                item = QTableWidgetItem(str(data[i].__dict__[names[j]]))
                 self.tableWidget.setItem(i, j, item)
-        self.tableWidget.sortByColumn(0, QtCore.Qt.AscendingOrder)
+        self.tableWidget.sortByColumn(0, Qt.AscendingOrder)
 
     def rb_to_pb_client(self):
-        self.pb_showTable.setText("Show client table")
+        self.pb_show_table.setText("Show client table")
 
     def rb_to_pb_ticket(self):
-        self.pb_showTable.setText("Show ticket table")
+        self.pb_show_table.setText("Show ticket table")
 
     def rb_to_pb_departure(self):
-        self.pb_showTable.setText("Show departure table")
+        self.pb_show_table.setText("Show departure table")
 
     def add_client(self):
         client = {
@@ -115,43 +116,37 @@ class MainWindow(QtGui.QMainWindow):
         }
 
         if not all(client.values()):
-            QtGui.QMessageBox.warning(
-                self, "Error",
-                "One or more fields are empty!")
+            required_field_empty_warning(self)
         else:
-            #self.insert_objects(Client(**client))
-            db.get_session().merge(Client(**client))
+            self.insert_objects(Client(**client))
 
-    def addCreatorToDB(self):
-        class Creator:
-            pass
+    def add_ticket(self, client, place, organisation=None):
+        """Insert new ticket to DB."""
 
-        Creator.Surname = unicode(
-            self.le_creatorSurname.text()).encode("utf-8")
-        Creator.Name = str(self.le_creatorName.text())
-        Creator.Position = str(self.cb_creatorPosition.currentText())
-        print(Creator.Surname)
-        if (Creator.Surname == "" or Creator.Name == ""):
-            QtGui.QMessageBox.warning(
-                self,
-                "Error",
-                "One or more fields are empty!")
+        ticket = {
+            "client": client,
+            "place": place,
+            "organisation": organisation,
+            "order_date": datetime.date(2016, 6, 23),  # self.le_ticket_order_d
+            "incoming_date": datetime.date(2016, 6, 25),
+            "departure_date": datetime.date(2016, 6, 30),
+            "table_num": 100,
+            "cost": 17000
+        }
+
+        if not all(ticket.values()):
+            required_field_empty_warning(self)
         else:
-            query = """INSERT INTO creator (surname, name, position)
-                       VALUES ({s}, {n}, {p});
-                    """.format(s=repr(Creator.Surname), n=repr(Creator.Name),
-                               p=repr(Creator.Position))
-            try:
-                self.connectToDB("model", "most")
-                cur = self.conn.cursor()
-                cur.execute(query)
-                self.conn.commit()
-            except ps2.DatabaseError as e:
-                if self.conn:
-                    self.conn.rollback()
-                    QtGui.QMessageBox.warning(self, "Error", str(e))
-            finally:
-                self.disconnect()
+            self.insert_objects(Ticket(**ticket))
+
+    def add_organisation(self):
+        """Insert new organisation to DB."""
+
+        name = str(self.le_organisation_name.text())
+        if not name:
+            required_field_empty_warning(self)
+        else:
+            self.insert_objects(Organisation(name=name))
 
     def addProjectToDB(self):
         def parseDate(original):
@@ -180,7 +175,7 @@ class MainWindow(QtGui.QMainWindow):
         Project.RenderProg = str(self.cb_projectRenderProg.currentText())
         Project.SendForm = str(self.cb_projectSendForm.currentText())
         if (Project.CreatorID == "" or Project.ClientID == "" or Project.Time == ""):
-            QtGui.QMessageBox.warning(
+            QMessageBox.warning(
                 self,
                 "Error",
                 "One or more fields are empty!")
@@ -206,7 +201,7 @@ class MainWindow(QtGui.QMainWindow):
             except ps2.DatabaseError as e:
                 if self.conn:
                     self.conn.rollback()
-                    QtGui.QMessageBox.warning(self, "Error", str(e))
+                    QMessageBox.warning(self, "Error", str(e))
             finally:
                 self.disconnect()
 
@@ -220,7 +215,7 @@ class MainWindow(QtGui.QMainWindow):
                 s=repr(surname),
                 n=repr(name))
         else:
-            QtGui.QMessageBox(self, "Error", "One field is empty")
+            QMessageBox(self, "Error", "One field is empty")
             return
 
         try:
@@ -230,7 +225,7 @@ class MainWindow(QtGui.QMainWindow):
             self.conn.commit()
         except ps2.DatabaseError as e:
             if self.conn:
-                QtGui.QMessageBox(self, "Error", str(e))
+                QMessageBox(self, "Error", str(e))
                 self.conn.rollback()
         finally:
             self.disconnect()
@@ -249,9 +244,9 @@ class MainWindow(QtGui.QMainWindow):
 
         # set parameters
         w = DeleteDialog("this record", "client")
-        if w.exec_() == QtGui.QDialog.Accepted:
+        if w.exec_() == QDialog.Accepted:
             self.abstractDel("client", clientID, clientSurname, clientName)
-            self.showTable()
+            self.show_table()
 
     def delCreator(self):
         # get info
@@ -266,17 +261,17 @@ class MainWindow(QtGui.QMainWindow):
 
         # set parameters
         w = DeleteDialog("this record", "creator")
-        if w.exec_() == QtGui.QDialog.Accepted:
+        if w.exec_() == QDialog.Accepted:
             self.abstractDel("creator", creatorID, creatorSurname, creatorName)
-            self.showTable()
+            self.show_table()
 
     def delProject(self):
         projectID = str(self.le_delProjectID.text())
 
         w = DeleteDialog("this record", "project")
-        if w.exec_() == QtGui.QDialog.Accepted:
+        if w.exec_() == QDialog.Accepted:
             self.abstractDel("project", object_id=projectID)
-            self.showTable()
+            self.show_table()
 
     def abstractChange(self, table, field, target, ident):
         query = "UPDATE {T} SET {f} = {t} WHERE id = {i}".format(
@@ -290,7 +285,7 @@ class MainWindow(QtGui.QMainWindow):
             cur.execute(query)
             self.conn.commit()
         except ps2.DatabaseError as e:
-            QtGui.QMessageBox.warning(self, "Error", str(e))
+            QMessageBox.warning(self, "Error", str(e))
             if self.conn:
                 self.conn.rollback()
         finally:
@@ -303,7 +298,7 @@ class MainWindow(QtGui.QMainWindow):
         target = str(self.le_changeClientTarget.text())
         self.abstractChange(table, field, target, ident)
         self.rb_client.setEnabled(True)
-        self.showTable()
+        self.show_table()
 
     def changeCreator(self):
         table = "creator"
@@ -312,7 +307,7 @@ class MainWindow(QtGui.QMainWindow):
         target = str(self.le_changeCreatorTarget.text())
         self.abstractChange(table, field, target, ident)
         self.rb_creator.setEnabled(True)
-        self.showTable()
+        self.show_table()
 
     def changeProject(self):
         table = "project"
@@ -321,21 +316,22 @@ class MainWindow(QtGui.QMainWindow):
         target = str(self.le_changeProjectTarget.text())
         self.abstractChange(table, field, target, ident)
         self.rb_project.setEnabled(True)
-        self.showTable()
+        self.show_table()
 
 
 def login(login):
     l = login()
-    return l.exec_() == QtGui.QDialog.Accepted
+    return l.exec_() == QDialog.Accepted
 
 
-class LoginWindow(QtGui.QDialog):
+class LoginWindow(QDialog):
     """Login dialog window."""
 
     def __init__(self):
-        QtGui.QDialog.__init__(self)
+        QDialog.__init__(self)
         self.login = QtGui.QLineEdit(self)
         self.password = QtGui.QLineEdit(self)
+        self.password.setEchoMode(QtGui.QLineEdit.Password)
         self.b_login = QtGui.QPushButton("Login", self)
         self.b_login.clicked.connect(self.handle_login)
         layout = QtGui.QVBoxLayout(self)
