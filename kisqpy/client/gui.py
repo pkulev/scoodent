@@ -2,7 +2,7 @@
 
 from PyQt4 import QtCore, QtGui, uic
 
-from kisqpy.common import db
+from kisqpy.common import db, config
 from kisqpy.models import Client
 
 
@@ -11,7 +11,7 @@ class DeleteDialog(QtGui.QDialog):
     def __init__(self, what, from_what):
         QtGui.QDialog.__init__(self)
         self.msg = "Delete {w} from {f} table?".format(w=what, f=from_what)
-        uic.loadUi("deldial.ui", self)
+        uic.loadUi(config.UI["delete_dialog"], self)
         self.label.setText(self.msg)
 
 
@@ -19,7 +19,7 @@ class MainWindow(QtGui.QMainWindow):
 
     def __init__(self):
         QtGui.QMainWindow.__init__(self)
-        uic.loadUi("main.ui", self)
+        uic.loadUi(config.UI["main"], self)
 
         # callbacks
         self.pb_showTable.clicked.connect(self.showTable)
@@ -46,6 +46,11 @@ class MainWindow(QtGui.QMainWindow):
         # delete if not needed
         self.cur = None
         self.data = None
+
+
+    def insert_to_db(obj):
+        #if isinstance(obj, [tuple, list
+        pass
 
     # Database features
     def connectToDB(self, db, usr):
