@@ -193,7 +193,7 @@
         </layout>
        </item>
        <item row="1" column="0">
-        <widget class="QPushButton" name="pb_addProject">
+        <widget class="QPushButton" name="pb_add_ticket">
          <property name="text">
           <string>Добавить</string>
          </property>
@@ -363,7 +363,7 @@
        </item>
       </layout>
      </widget>
-     <widget class="QPushButton" name="pb_addClient">
+     <widget class="QPushButton" name="pd_add_client">
       <property name="geometry">
        <rect>
         <x>20</x>
@@ -375,14 +375,20 @@
       <property name="text">
        <string>Добавить</string>
       </property>
+      <property name="checkable">
+       <bool>false</bool>
+      </property>
+      <property name="checked">
+       <bool>false</bool>
+      </property>
      </widget>
      <widget class="QWidget" name="">
       <property name="geometry">
        <rect>
         <x>380</x>
-        <y>160</y>
+        <y>140</y>
         <width>171</width>
-        <height>145</height>
+        <height>161</height>
        </rect>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -440,7 +446,7 @@
         <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
        </property>
        <item row="1" column="1">
-        <widget class="QPushButton" name="pb_addCreator">
+        <widget class="QPushButton" name="pb_add_organisation">
          <property name="text">
           <string>Добавить</string>
          </property>
@@ -528,7 +534,7 @@
          <widget class="QLineEdit" name="le_delClientName"/>
         </item>
         <item>
-         <widget class="QPushButton" name="pb_delClient">
+         <widget class="QPushButton" name="pb_del_client">
           <property name="text">
            <string>Удалить</string>
           </property>
@@ -586,7 +592,7 @@
          <widget class="QLineEdit" name="le_delCreatorName"/>
         </item>
         <item>
-         <widget class="QPushButton" name="pb_delCreator">
+         <widget class="QPushButton" name="pb_del_organisation">
           <property name="text">
            <string>Удалить</string>
           </property>
@@ -631,7 +637,7 @@
          <widget class="QLineEdit" name="le_delProjectID"/>
         </item>
         <item>
-         <widget class="QPushButton" name="pb_delProject">
+         <widget class="QPushButton" name="pb_del_ticket">
           <property name="text">
            <string>Удалить</string>
           </property>
@@ -650,7 +656,7 @@
        </rect>
       </property>
       <property name="currentIndex">
-       <number>2</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="tab_4">
        <attribute name="title">
@@ -728,12 +734,17 @@
             </item>
             <item>
              <property name="text">
-              <string>address</string>
+              <string>birthday</string>
              </property>
             </item>
             <item>
              <property name="text">
-              <string>email</string>
+              <string>city</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>street</string>
              </property>
             </item>
             <item>
@@ -748,7 +759,7 @@
           </item>
          </layout>
         </widget>
-        <widget class="QPushButton" name="pb_changeClient">
+        <widget class="QPushButton" name="pb_change_client">
          <property name="geometry">
           <rect>
            <x>20</x>
@@ -777,7 +788,7 @@
          </rect>
         </property>
         <property name="title">
-         <string>Изменить сотрудника</string>
+         <string>Изменить организацию</string>
         </property>
         <widget class="QWidget" name="layoutWidget">
          <property name="geometry">
@@ -839,7 +850,7 @@
           </item>
          </layout>
         </widget>
-        <widget class="QPushButton" name="pb_changeCreator">
+        <widget class="QPushButton" name="pb_change_organisation">
          <property name="geometry">
           <rect>
            <x>30</x>
@@ -858,7 +869,7 @@
        <attribute name="title">
         <string>Тикет</string>
        </attribute>
-       <widget class="QPushButton" name="pb_changeProject">
+       <widget class="QPushButton" name="pb_change_ticket">
         <property name="geometry">
          <rect>
           <x>30</x>
@@ -877,7 +888,7 @@
           <x>10</x>
           <y>10</y>
           <width>122</width>
-          <height>91</height>
+          <height>101</height>
          </rect>
         </property>
         <layout class="QVBoxLayout" name="verticalLayout_15">
@@ -921,32 +932,7 @@
           <widget class="QComboBox" name="cb_changeProjectField">
            <item>
             <property name="text">
-             <string>opendate</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>closedate</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>time</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>creationprog</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>renderprog</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>sendform</string>
+             <string>Nothing</string>
             </property>
            </item>
           </widget>
@@ -1014,8 +1000,21 @@
      <height>21</height>
     </rect>
    </property>
+   <widget class="QMenu" name="menuFile">
+    <property name="title">
+     <string>File</string>
+    </property>
+    <addaction name="separator"/>
+    <addaction name="action_exit"/>
+   </widget>
+   <addaction name="menuFile"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
+  <action name="action_exit">
+   <property name="text">
+    <string>Exit</string>
+   </property>
+  </action>
  </widget>
  <resources/>
  <connections/>

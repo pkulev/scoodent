@@ -2,9 +2,14 @@
 
 import datetime
 
-from PyQt4 import QtGui, uic
+from PyQt4 import uic
 from PyQt4.QtCore import Qt
-from PyQt4.QtGui import QDialog, QMessageBox, QTableWidgetItem
+from PyQt4.QtGui import (
+    QDialog,
+    QMainWindow,
+    QMessageBox, QTableWidgetItem, QLineEdit,
+    QPushButton, QVBoxLayout, QLabel
+)
 
 from kisqpy.common import db, config
 from kisqpy.models import Client, Ticket, Departure, Organisation
@@ -16,6 +21,7 @@ class DeleteDialog(QDialog):
     def __init__(self, what, from_what):
         QDialog.__init__(self)
         self.msg = "Delete {w} from {f} table?".format(w=what, f=from_what)
+        #TODO: self.label = QLabel
         uic.loadUi(config.UI["delete_dialog"], self)
         self.label.setText(self.msg)
 
@@ -26,10 +32,10 @@ def required_field_empty_warning(parent, msg="One or more fields are empty."):
     QMessageBox.warning(parent, "Error", msg)
 
 
-class MainWindow(QtGui.QMainWindow):
+class MainWindow(QMainWindow):
 
     def __init__(self):
-        QtGui.QMainWindow.__init__(self)
+        super(MainWindow, self).__init__(self)
         uic.loadUi(config.UI["main"], self)
 
         self.pb_showTable.clicked.connect(self.show_table)
@@ -38,13 +44,13 @@ class MainWindow(QtGui.QMainWindow):
         self.rb_ticket.clicked.connect(self.rb_to_pb_ticket)
         self.rb_departure.clicked.connect(self.rb_to_pb_departure)
 
-        self.pb_addClient.clicked.connect(self.add_client)
-        self.pb_addCreator.clicked.connect(self.add_ticket)
-        self.pb_addProject.clicked.connect(self.add_organisation)
+        self.pb_add_client.clicked.connect(self.add_client)
+        self.pb_add_ticket.clicked.connect(self.add_ticket)
+        self.pb_add_organisation.clicked.connect(self.add_organisation)
 
-        self.pb_delClient.clicked.connect(self.delClient)
-        self.pb_delCreator.clicked.connect(self.delCreator)
-        self.pb_delProject.clicked.connect(self.delProject)
+        self.pb_del_client.clicked.connect(self.del_client)
+        self.pb_del_organisation.clicked.connect(self.del_organisation)
+        self.pb_del_ticket.clicked.connect(self.del_ticket)
 
         self.pb_changeClient.clicked.connect(self.changeClient)
         self.pb_changeCreator.clicked.connect(self.changeCreator)
@@ -329,12 +335,12 @@ class LoginWindow(QDialog):
 
     def __init__(self):
         QDialog.__init__(self)
-        self.login = QtGui.QLineEdit(self)
-        self.password = QtGui.QLineEdit(self)
-        self.password.setEchoMode(QtGui.QLineEdit.Password)
-        self.b_login = QtGui.QPushButton("Login", self)
+        self.login = QLineEdit(self)
+        self.password = QLineEdit(self)
+        self.password.setEchoMode(QLineEdit.Password)
+        self.b_login = QPushButton("Login", self)
         self.b_login.clicked.connect(self.handle_login)
-        layout = QtGui.QVBoxLayout(self)
+        layout = QVBoxLayout(self)
         layout.addWidget(self.login)
         layout.addWidget(self.password)
         layout.addWidget(self.b_login)
@@ -346,8 +352,8 @@ class LoginWindow(QDialog):
         ):
             self.accept()
         else:
-            QtGui.QMessageBox.warning(self, "Error", "Bad user or password")
+            QMessageBox.warning(self, "Error", "Bad user or password")
 
     @staticmethod
     def do_login():
-        return LoginWindow().exec_() == QtGui.QDialog.Accepted
+        return LoginWindow().exec_() == QDialog.Accepted
