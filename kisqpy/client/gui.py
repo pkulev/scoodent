@@ -35,7 +35,7 @@ def required_field_empty_warning(parent, msg="One or more fields are empty."):
 class MainWindow(QMainWindow):
 
     def __init__(self):
-        super(MainWindow, self).__init__(self)
+        QMainWindow.__init__(self)
         uic.loadUi(config.UI["main"], self)
 
         self.pb_showTable.clicked.connect(self.show_table)
@@ -52,9 +52,11 @@ class MainWindow(QMainWindow):
         self.pb_del_organisation.clicked.connect(self.del_organisation)
         self.pb_del_ticket.clicked.connect(self.del_ticket)
 
-        self.pb_changeClient.clicked.connect(self.changeClient)
-        self.pb_changeCreator.clicked.connect(self.changeCreator)
-        self.pb_changeProject.clicked.connect(self.changeProject)
+        self.pb_change_client.clicked.connect(self.change_client)
+        self.pb_change_organisation.clicked.connect(self.change_organisation)
+        self.pb_change_ticket.clicked.connect(self.change_ticket)
+
+        self.show_table()
 
     @staticmethod
     def insert_objects(obj):
@@ -254,30 +256,23 @@ class MainWindow(QMainWindow):
             self.abstractDel("client", clientID, clientSurname, clientName)
             self.show_table()
 
-    def delCreator(self):
-        # get info
-        if self.rb_delCreatorByID.isChecked():
-            creatorID = str(self.le_delCreatorID.text())
-            creatorSurname = None
-            creatorName = None
-        else:
-            creatorSurname = str(self.le_delCreatorSurname.text())
-            creatorName = str(self.le_delCreatorName.text())
-            creatorID = None
+    def del_client(self):
+        """Delete client."""
 
-        # set parameters
-        w = DeleteDialog("this record", "creator")
+        w = DeleteDialog("this record", "client")
         if w.exec_() == QDialog.Accepted:
-            self.abstractDel("creator", creatorID, creatorSurname, creatorName)
+            self.abstractDel("client", clientID, clientSurname, clientName)
             self.show_table()
 
-    def delProject(self):
-        projectID = str(self.le_delProjectID.text())
+    def del_organisation(self):
+        """Delete organisation."""
 
-        w = DeleteDialog("this record", "project")
-        if w.exec_() == QDialog.Accepted:
-            self.abstractDel("project", object_id=projectID)
-            self.show_table()
+        pass
+
+    def del_ticket(self):
+        """Delete ticket."""
+
+        pass
 
     def abstractChange(self, table, field, target, ident):
         query = "UPDATE {T} SET {f} = {t} WHERE id = {i}".format(
@@ -296,6 +291,15 @@ class MainWindow(QMainWindow):
                 self.conn.rollback()
         finally:
             self.conn.close
+
+    def change_client(self):
+        pass
+
+    def change_organisation(self):
+        pass
+
+    def change_ticket(self):
+        pass
 
     def changeClient(self):
         table = "client"
@@ -346,6 +350,9 @@ class LoginWindow(QDialog):
         layout.addWidget(self.b_login)
 
     def handle_login(self):
+        """Login handler."""
+
+        # TODO: get user from database
         if (
                 self.login.text() == "admin" and
                 self.password.text() == "admin"
