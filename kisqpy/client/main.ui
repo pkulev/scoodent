@@ -56,6 +56,12 @@
     <attribute name="horizontalHeaderCascadingSectionResizes">
      <bool>true</bool>
     </attribute>
+    <attribute name="horizontalHeaderStretchLastSection">
+     <bool>false</bool>
+    </attribute>
+    <attribute name="verticalHeaderCascadingSectionResizes">
+     <bool>true</bool>
+    </attribute>
    </widget>
    <widget class="QTabWidget" name="tabWidget">
     <property name="geometry">
@@ -130,10 +136,10 @@
          <item row="0" column="1">
           <layout class="QVBoxLayout" name="verticalLayout_4">
            <item>
-            <widget class="QLineEdit" name="le_projectClientID"/>
+            <widget class="QLineEdit" name="le_ticket_client_id"/>
            </item>
            <item>
-            <widget class="QDateEdit" name="de_projectOpenDate">
+            <widget class="QDateEdit" name="de_ticket_incoming_date">
              <property name="displayFormat">
               <string>yy-MM-dd</string>
              </property>
@@ -150,7 +156,7 @@
             </widget>
            </item>
            <item>
-            <widget class="QDateEdit" name="de_projectCloseDate">
+            <widget class="QDateEdit" name="de_ticket_departure_date">
              <property name="displayFormat">
               <string>yy-MM-dd</string>
              </property>
@@ -167,10 +173,10 @@
             </widget>
            </item>
            <item>
-            <widget class="QSpinBox" name="sb_projectTime"/>
+            <widget class="QSpinBox" name="sb_ticket_table_num"/>
            </item>
            <item>
-            <widget class="QComboBox" name="cb_projectCreationProg">
+            <widget class="QComboBox" name="cb_ticket_category">
              <item>
               <property name="text">
                <string>Полулюкс</string>
@@ -263,7 +269,7 @@
        <item>
         <layout class="QVBoxLayout" name="verticalLayout_2">
          <item>
-          <widget class="QLineEdit" name="le_clientSurname">
+          <widget class="QLineEdit" name="le_client_surname">
            <property name="minimumSize">
             <size>
              <width>251</width>
@@ -279,7 +285,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QLineEdit" name="le_clientName">
+          <widget class="QLineEdit" name="le_client_name">
            <property name="minimumSize">
             <size>
              <width>251</width>
@@ -295,7 +301,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QDateEdit" name="de_clientBirthdate">
+          <widget class="QDateEdit" name="de_client_birthdate">
            <property name="displayFormat">
             <string>yy-MM-dd</string>
            </property>
@@ -312,7 +318,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QLineEdit" name="le_clientCity">
+          <widget class="QLineEdit" name="le_client_city">
            <property name="minimumSize">
             <size>
              <width>251</width>
@@ -328,7 +334,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QLineEdit" name="le_clientStreet">
+          <widget class="QLineEdit" name="le_client_street">
            <property name="minimumSize">
             <size>
              <width>251</width>
@@ -344,7 +350,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QLineEdit" name="le_clientPhone">
+          <widget class="QLineEdit" name="le_client_phone">
            <property name="minimumSize">
             <size>
              <width>251</width>
@@ -398,7 +404,7 @@
           <string>Client</string>
          </property>
          <property name="checked">
-          <bool>true</bool>
+          <bool>false</bool>
          </property>
         </widget>
        </item>
@@ -406,6 +412,9 @@
         <widget class="QRadioButton" name="rb_ticket">
          <property name="text">
           <string>Ticket</string>
+         </property>
+         <property name="checked">
+          <bool>true</bool>
          </property>
         </widget>
        </item>
@@ -417,6 +426,13 @@
         </widget>
        </item>
        <item>
+        <widget class="QRadioButton" name="rb_organisation">
+         <property name="text">
+          <string>Organisation</string>
+         </property>
+        </widget>
+       </item>
+       <item>
         <widget class="QCheckBox" name="chb_replaceIDs">
          <property name="text">
           <string>Replace IDs</string>
@@ -424,7 +440,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="pb_showTable">
+        <widget class="QPushButton" name="pb_show_table">
          <property name="text">
           <string>Show client table</string>
          </property>
@@ -466,7 +482,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QLineEdit" name="le_creatorName">
+           <widget class="QLineEdit" name="le_organisation_name">
             <property name="minimumSize">
              <size>
               <width>0</width>

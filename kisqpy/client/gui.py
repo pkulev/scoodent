@@ -5,10 +5,8 @@ import datetime
 from PyQt4 import uic
 from PyQt4.QtCore import Qt
 from PyQt4.QtGui import (
-    QDialog,
-    QMainWindow,
-    QMessageBox, QTableWidgetItem, QLineEdit,
-    QPushButton, QVBoxLayout, QLabel
+    QDialog, QItemSelectionModel, QLineEdit, QLabel, QMainWindow,
+    QMessageBox, QPushButton, QTableWidgetItem, QVBoxLayout
 )
 
 from kisqpy.common import db, config
@@ -38,11 +36,12 @@ class MainWindow(QMainWindow):
         QMainWindow.__init__(self)
         uic.loadUi(config.UI["main"], self)
 
-        self.pb_showTable.clicked.connect(self.show_table)
+        self.pb_show_table.clicked.connect(self.show_table)
 
         self.rb_client.clicked.connect(self.rb_to_pb_client)
         self.rb_ticket.clicked.connect(self.rb_to_pb_ticket)
         self.rb_departure.clicked.connect(self.rb_to_pb_departure)
+        self.rb_organisation.clicked.connect(self.rb_to_pb_organisation)
 
         self.pb_add_client.clicked.connect(self.add_client)
         self.pb_add_ticket.clicked.connect(self.add_ticket)
@@ -55,6 +54,9 @@ class MainWindow(QMainWindow):
         self.pb_change_client.clicked.connect(self.change_client)
         self.pb_change_organisation.clicked.connect(self.change_organisation)
         self.pb_change_ticket.clicked.connect(self.change_ticket)
+
+        self.tableWidget.cellClicked.connect(self.select_table_row)
+        self.tableWidget.cellDoubleClicked.connect(self.open_ticket_info)
 
         self.show_table()
 
@@ -75,6 +77,7 @@ class MainWindow(QMainWindow):
                 self.rb_client: Client,
                 self.rb_ticket: Ticket,
                 self.rb_departure: Departure,
+                self.rb_organisation: Organisation,
             }
 
             for rb, res in choises.items():
@@ -91,18 +94,29 @@ class MainWindow(QMainWindow):
         names = column_names(model)
         data = list(session.query(model))
 
-        lines = len(data)
+        rows = len(data)
         columns = len(names)
+        self.tableWidget.clear()
         self.tableWidget.setSortingEnabled(True)
-        self.tableWidget.setRowCount(lines)
+        self.tableWidget.setRowCount(rows)
         self.tableWidget.setColumnCount(columns)
         self.tableWidget.setHorizontalHeaderLabels(names)
+        # self.tableWidget.sortByColumn(0, Qt.AscendingOrder)
 
-        for i in range(lines):
+        for i in range(rows):
             for j in range(columns):
                 item = QTableWidgetItem(str(data[i].__dict__[names[j]]))
                 self.tableWidget.setItem(i, j, item)
-        self.tableWidget.sortByColumn(0, Qt.AscendingOrder)
+
+    def select_table_row(self, row, column):
+        """ """
+
+        self.tableWidget.setCurrentIndex((row, column), QItemSelectionModel.NoUpdate)
+
+    def open_ticket_info(self, row, column):
+        """ """
+
+        raise Exception("double" + str((row, column)))
 
     def rb_to_pb_client(self):
         self.pb_show_table.setText("Show client table")
@@ -113,14 +127,17 @@ class MainWindow(QMainWindow):
     def rb_to_pb_departure(self):
         self.pb_show_table.setText("Show departure table")
 
+    def rb_to_pb_organisation(self):
+        self.pb_show_table.setText("Show organisation table")
+
     def add_client(self):
         client = {
-            "name": str(self.le_clientName.text()),
-            "surname": str(self.le_clientSurname.text()),
+            "name": str(self.le_client_name.text()),
+            "surname": str(self.le_client_surname.text()),
             "birthdate": datetime.date(2016, 6, 12),
-            "city": str(self.le_clientCity.text()),
-            "street": str(self.le_clientStreet.text()),
-            "phone": str(self.le_clientPhone.text()),
+            "city": str(self.le_client_city.text()),
+            "street": str(self.le_client_street.text()),
+            "phone": str(self.le_client_phone.text()),
         }
 
         if not all(client.values()):
