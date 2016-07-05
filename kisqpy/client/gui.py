@@ -19,7 +19,7 @@ class DeleteDialog(QDialog):
     def __init__(self, what, from_what):
         QDialog.__init__(self)
         self.msg = "Delete {w} from {f} table?".format(w=what, f=from_what)
-        #TODO: self.label = QLabel
+        # TODO: self.label = QLabel
         uic.loadUi(config.UI["delete_dialog"], self)
         self.label.setText(self.msg)
 
@@ -36,6 +36,7 @@ class MainWindow(QMainWindow):
         QMainWindow.__init__(self)
         uic.loadUi(config.UI["main"], self)
 
+        self.action_exit.triggered.connect(self.close)
         self.pb_show_table.clicked.connect(self.show_table)
 
         self.rb_client.clicked.connect(self.rb_to_pb_client)
