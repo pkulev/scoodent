@@ -18,7 +18,6 @@ def get_appartaments(places, percent):
     :return: place dict
     """
 
-
     if 0 <= percent <= 50:
         category = CategoryEnum.half_lux
     elif 50 < percent <= 90:
@@ -95,7 +94,7 @@ def json_without_id(path):
 
     with open(path, "r") as source:
         data = json.load(source)
-    map(lambda it: it.pop["id"], data)
+    list(map(lambda it: it.pop("id"), data))
     return data
 
 

@@ -15,26 +15,37 @@ DBAPI = constants.DBAPI_POSTGRES
 """Database API."""
 
 
-DB_URI_TPL = "{schema}+{driver}://{user}:{password}@{host}:{port}/{dbname}"
-"""Database URI template."""
+# DB_URI_TPL =
+# """Database URI template."""
 
 
 DB_URIS = {
     constants.DBAPI_POSTGRES: {
-        "schema": constants.DBAPI_POSTGRES,
-        "driver": constants.DBDRIVER_PSYCOPG2,
-        "user": os.environ["USER"],
-        "password": os.environ.get("KISQPY_DB_PASS", ""),
-        "host": os.environ.get("KISQPY_DB_HOST", "localhost"),
-        "port": int(os.environ.get("KISQPY_DB_PORT", 5432)),
-        "dbname": constants.DB_NAME
-    }
+        "uri": "{schema}+{driver}://{user}:{password}@{host}:{port}/{dbname}",
+        "options": {
+            "schema": constants.DBAPI_POSTGRES,
+            "driver": constants.DBDRIVER_PSYCOPG2,
+            "user": os.environ["USER"],
+            "password": os.environ.get("KISQPY_DB_PASS", ""),
+            "host": os.environ.get("KISQPY_DB_HOST", "localhost"),
+            "port": int(os.environ.get("KISQPY_DB_PORT", 5432)),
+            "dbname": constants.DB_NAME,
+        },
+    },
+    constants.DBAPI_SQLITE: {
+        "uri": "{schema}+{driver}://{user}:{password}@{host}:{port}/{dbname}",
+        "options": {
+            "schema": constants.DBAPI_SQLITE,
+            "host": os.environ.get("KISQPY_DB_HOST", "localhost"),
+        },
+    },
 }
 """Database URI config."""
 
 
-DB_URI = DB_URI_TPL.format(**DB_URIS[DBAPI])
-"""Database Unified Resource Locator."""
+DB_URI = DB_URIS[DBAPI]["uri"].format(**DB_URIS[DBAPI]["options"])
+# DB_URI_TPL.format(**DB_URIS[DBAPI])
+# """Database Unified Resource Locator."""
 
 
 ROOT = os.path.dirname(kisqpy.__file__)

@@ -49,7 +49,7 @@ class Client(Base):
 
     __tablename__ = "client"
 
-    id = Column(Integer, primary_key=True, unique=True)
+    id = Column(Integer, primary_key=True)
     name = Column(String(64), nullable=False)
     surname = Column(String(64), nullable=False)
     birthdate = Column(Date, nullable=False)
@@ -63,7 +63,7 @@ class Departure(Base):
 
     __tablename__ = "departure"
 
-    id = Column(Integer, primary_key=True, unique=True)
+    id = Column(Integer, primary_key=True)
     ticket_id = Column(Integer, ForeignKey("ticket.id"), unique=True)
     incoming_date = Column(Date)
     departure_date = Column(Date)
@@ -76,7 +76,7 @@ class Organisation(Base):
 
     __tablename__ = "organisation"
 
-    id = Column(Integer, primary_key=True, unique=True)
+    id = Column(Integer, primary_key=True)
     name = Column(String(128), nullable=False)
 
 
@@ -85,7 +85,7 @@ class Place(Base):
 
     __tablename__ = "place"
 
-    id = Column(Integer, primary_key=True, unique=True)
+    id = Column(Integer, primary_key=True)
     name = Column(String(64), nullable=False)
     room = Column(Integer, nullable=False)
     category = Column(Category, nullable=False)

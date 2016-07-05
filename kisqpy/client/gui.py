@@ -68,7 +68,7 @@ class MainWindow(QMainWindow):
         if isinstance(obj, (tuple, list)):
             session.add_all(obj)
         else:
-            session.merge(obj)
+            session.add(obj)
         session.commit()
 
     def show_table(self):
@@ -109,12 +109,13 @@ class MainWindow(QMainWindow):
                 self.tableWidget.setItem(i, j, item)
 
     def select_table_row(self, row, column):
-        """ """
+        """Select current table row."""
 
-        self.tableWidget.setCurrentIndex((row, column), QItemSelectionModel.NoUpdate)
+        self.tableWidget.setCurrentIndex(
+            (row, column), QItemSelectionModel.NoUpdate)
 
     def open_ticket_info(self, row, column):
-        """ """
+        """Open current ticket info window."""
 
         raise Exception("double" + str((row, column)))
 
@@ -171,7 +172,8 @@ class MainWindow(QMainWindow):
         if not name:
             required_field_empty_warning(self)
         else:
-            self.insert_objects(Organisation(name=name))
+            org = Organisation(name=name)
+            self.insert_objects(org)  # Organisation(name=name))
 
     def addProjectToDB(self):
         def parseDate(original):
