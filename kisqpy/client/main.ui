@@ -141,7 +141,7 @@
            <item>
             <widget class="QDateEdit" name="de_ticket_incoming_date">
              <property name="displayFormat">
-              <string>yy-MM-dd</string>
+              <string>dd-MM-yyyy</string>
              </property>
              <property name="calendarPopup">
               <bool>true</bool>
@@ -158,7 +158,7 @@
            <item>
             <widget class="QDateEdit" name="de_ticket_departure_date">
              <property name="displayFormat">
-              <string>yy-MM-dd</string>
+              <string>dd-MM-yyyy</string>
              </property>
              <property name="calendarPopup">
               <bool>true</bool>
@@ -206,187 +206,6 @@
         </widget>
        </item>
       </layout>
-     </widget>
-     <widget class="QGroupBox" name="groupBox">
-      <property name="geometry">
-       <rect>
-        <x>0</x>
-        <y>10</y>
-        <width>371</width>
-        <height>261</height>
-       </rect>
-      </property>
-      <property name="title">
-       <string>Добавить клиента</string>
-      </property>
-      <layout class="QHBoxLayout" name="horizontalLayout">
-       <item>
-        <layout class="QVBoxLayout" name="verticalLayout">
-         <item>
-          <widget class="QLabel" name="label">
-           <property name="text">
-            <string>Фамилия</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLabel" name="label_2">
-           <property name="text">
-            <string>Имя</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLabel" name="label_3">
-           <property name="text">
-            <string>Дата рожд.</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLabel" name="label_4">
-           <property name="text">
-            <string>Город</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLabel" name="label_26">
-           <property name="text">
-            <string>Улица</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLabel" name="label_5">
-           <property name="text">
-            <string>Телефон</string>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </item>
-       <item>
-        <layout class="QVBoxLayout" name="verticalLayout_2">
-         <item>
-          <widget class="QLineEdit" name="le_client_surname">
-           <property name="minimumSize">
-            <size>
-             <width>251</width>
-             <height>0</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>251</width>
-             <height>16777215</height>
-            </size>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLineEdit" name="le_client_name">
-           <property name="minimumSize">
-            <size>
-             <width>251</width>
-             <height>0</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>251</width>
-             <height>16777215</height>
-            </size>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QDateEdit" name="de_client_birthdate">
-           <property name="displayFormat">
-            <string>yy-MM-dd</string>
-           </property>
-           <property name="calendarPopup">
-            <bool>true</bool>
-           </property>
-           <property name="date">
-            <date>
-             <year>2013</year>
-             <month>1</month>
-             <day>1</day>
-            </date>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLineEdit" name="le_client_city">
-           <property name="minimumSize">
-            <size>
-             <width>251</width>
-             <height>0</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>251</width>
-             <height>16777215</height>
-            </size>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLineEdit" name="le_client_street">
-           <property name="minimumSize">
-            <size>
-             <width>251</width>
-             <height>0</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>251</width>
-             <height>16777215</height>
-            </size>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLineEdit" name="le_client_phone">
-           <property name="minimumSize">
-            <size>
-             <width>251</width>
-             <height>0</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>251</width>
-             <height>16777215</height>
-            </size>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </item>
-      </layout>
-     </widget>
-     <widget class="QPushButton" name="pb_add_client">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>270</y>
-        <width>97</width>
-        <height>27</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Добавить</string>
-      </property>
-      <property name="checkable">
-       <bool>false</bool>
-      </property>
-      <property name="checked">
-       <bool>false</bool>
-      </property>
      </widget>
      <widget class="QWidget" name="layoutWidget">
       <property name="geometry">
@@ -495,6 +314,19 @@
         </widget>
        </item>
       </layout>
+     </widget>
+     <widget class="QPushButton" name="pb_add_client">
+      <property name="geometry">
+       <rect>
+        <x>100</x>
+        <y>130</y>
+        <width>80</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>ADD CLIENT</string>
+      </property>
      </widget>
     </widget>
     <widget class="QWidget" name="tab_2">

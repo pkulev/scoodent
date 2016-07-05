@@ -19,7 +19,6 @@ class DeleteDialog(QDialog):
     def __init__(self, what, from_what):
         QDialog.__init__(self)
         self.msg = "Delete {w} from {f} table?".format(w=what, f=from_what)
-        # TODO: self.label = QLabel
         uic.loadUi(config.UI["delete_dialog"], self)
         self.label.setText(self.msg)
 
@@ -28,6 +27,52 @@ def required_field_empty_warning(parent, msg="One or more fields are empty."):
     """Warn user."""
 
     QMessageBox.warning(parent, "Error", msg)
+
+
+class TicketInfoDialog(QDialog):
+
+    def __init__(self, ticket_id):
+        QDialog.__init__(self)
+        uic.loadUi(config.UI["ticket_info_dialog"], self)
+
+        self.ticket_id = ticket_id
+        self.load_ticket_info()
+
+    def load_ticket_info(self):
+        """Get all needed info from DB."""
+
+        session = db.get_session()
+        ticket = session.query(Ticket).filter(Ticket.id == ticket_id).first()
+
+        self.lab_ticket_id.setText(str(ticket.id))
+        self.lab_client.setText(str(ticket.client_id))  # replace by short info
+        self.lab_organisation.setText(str(ticket.org_id))  # replace by name
+        self.lab_place.setText(str(ticket.place_id))  # replace by info
+        # self.de_order_date  # TODO
+
+
+class ClientAddDialog(QDialog):
+
+    def __init__(self):
+        QDialog.__init__(self)
+        uic.loadUi(config.UI["client_add_dialog"], self)
+
+        self.pb_add_client.clicked.connect(self.add_client)
+
+    def add_client(self):
+        client = {
+            "name": str(self.le_client_name.text()),
+            "surname": str(self.le_client_surname.text()),
+            "birthdate": datetime.date(2016, 6, 12),
+            "city": str(self.le_client_city.text()),
+            "street": str(self.le_client_street.text()),
+            "phone": str(self.le_client_phone.text()),
+        }
+
+        if not all(client.values()):
+            required_field_empty_warning(self)
+        else:
+            self.insert_objects(Client(**client))
 
 
 class MainWindow(QMainWindow):
@@ -39,12 +84,14 @@ class MainWindow(QMainWindow):
         self.action_exit.triggered.connect(self.close)
         self.pb_show_table.clicked.connect(self.show_table)
 
+        # TODO
+        self.pb_add_client.clicked.connect(lambda: ClientAddDialog().exec_())
+
         self.rb_client.clicked.connect(self.rb_to_pb_client)
         self.rb_ticket.clicked.connect(self.rb_to_pb_ticket)
         self.rb_departure.clicked.connect(self.rb_to_pb_departure)
         self.rb_organisation.clicked.connect(self.rb_to_pb_organisation)
 
-        self.pb_add_client.clicked.connect(self.add_client)
         self.pb_add_ticket.clicked.connect(self.add_ticket)
         self.pb_add_organisation.clicked.connect(self.add_organisation)
 
@@ -118,7 +165,8 @@ class MainWindow(QMainWindow):
     def open_ticket_info(self, row, column):
         """Open current ticket info window."""
 
-        raise Exception("double" + str((row, column)))
+        ticket_id = int(self.tableWidget.item(row + 1, 0).text())
+        TicketInfoDialog(ticket_id=ticket_id).exec_()
 
     def rb_to_pb_client(self):
         self.pb_show_table.setText("Show client table")
@@ -131,21 +179,6 @@ class MainWindow(QMainWindow):
 
     def rb_to_pb_organisation(self):
         self.pb_show_table.setText("Show organisation table")
-
-    def add_client(self):
-        client = {
-            "name": str(self.le_client_name.text()),
-            "surname": str(self.le_client_surname.text()),
-            "birthdate": datetime.date(2016, 6, 12),
-            "city": str(self.le_client_city.text()),
-            "street": str(self.le_client_street.text()),
-            "phone": str(self.le_client_phone.text()),
-        }
-
-        if not all(client.values()):
-            required_field_empty_warning(self)
-        else:
-            self.insert_objects(Client(**client))
 
     def add_ticket(self, client, place, organisation=None):
         """Insert new ticket to DB."""
