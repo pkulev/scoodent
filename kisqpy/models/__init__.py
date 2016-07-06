@@ -40,7 +40,11 @@ class Money(UserDefinedType):
                 trimpoint = 1
                 sign = ""
 
-            return Decimal(sign + value[trimpoint:].replace(",", ""))
+            raise Exception(value)
+            parsed = "".join(
+                list(filter(lambda it: it.isdigit(), value[trimpoint:])))
+
+            return Decimal(sign + parsed)
         return process
 
 

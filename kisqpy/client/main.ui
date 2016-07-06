@@ -57,18 +57,21 @@
      <bool>true</bool>
     </attribute>
     <attribute name="horizontalHeaderStretchLastSection">
-     <bool>false</bool>
+     <bool>true</bool>
     </attribute>
     <attribute name="verticalHeaderCascadingSectionResizes">
      <bool>true</bool>
     </attribute>
+    <attribute name="verticalHeaderStretchLastSection">
+     <bool>true</bool>
+    </attribute>
    </widget>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>10</x>
       <y>3</y>
-      <width>673</width>
+      <width>901</width>
       <height>41</height>
      </rect>
     </property>
@@ -144,7 +147,7 @@
      <x>0</x>
      <y>0</y>
      <width>1017</width>
-     <height>19</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">

@@ -32,10 +32,10 @@
   <widget class="QGroupBox" name="groupBox">
    <property name="geometry">
     <rect>
-     <x>20</x>
+     <x>10</x>
      <y>20</y>
-     <width>449</width>
-     <height>251</height>
+     <width>451</width>
+     <height>301</height>
     </rect>
    </property>
    <property name="minimumSize">
@@ -45,19 +45,19 @@
     </size>
    </property>
    <property name="title">
-    <string>GroupBox</string>
+    <string>Client info</string>
    </property>
    <widget class="QPushButton" name="pb_add_client">
     <property name="geometry">
      <rect>
-      <x>30</x>
-      <y>210</y>
+      <x>20</x>
+      <y>260</y>
       <width>97</width>
       <height>27</height>
      </rect>
     </property>
     <property name="text">
-     <string>Добавить</string>
+     <string>Add client</string>
     </property>
     <property name="checkable">
      <bool>false</bool>
@@ -71,20 +71,23 @@
      <rect>
       <x>20</x>
       <y>30</y>
-      <width>321</width>
-      <height>165</height>
+      <width>341</width>
+      <height>201</height>
      </rect>
     </property>
-    <layout class="QGridLayout" name="gridLayout">
+    <layout class="QFormLayout" name="formLayout">
+     <property name="fieldGrowthPolicy">
+      <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
+     </property>
      <item row="0" column="0">
       <widget class="QLabel" name="label">
        <property name="text">
-        <string>Фамилия</string>
+        <string>Surname</string>
        </property>
       </widget>
      </item>
      <item row="0" column="1">
-      <widget class="QLineEdit" name="le_client_surname">
+      <widget class="QLineEdit" name="le_surname">
        <property name="minimumSize">
         <size>
          <width>251</width>
@@ -102,41 +105,19 @@
      <item row="1" column="0">
       <widget class="QLabel" name="label_2">
        <property name="text">
-        <string>Имя</string>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="1">
-      <widget class="QLineEdit" name="le_client_name">
-       <property name="minimumSize">
-        <size>
-         <width>251</width>
-         <height>0</height>
-        </size>
-       </property>
-       <property name="maximumSize">
-        <size>
-         <width>251</width>
-         <height>16777215</height>
-        </size>
+        <string>Name</string>
        </property>
       </widget>
      </item>
      <item row="2" column="0">
       <widget class="QLabel" name="label_3">
        <property name="text">
-        <string>Дата рожд.</string>
+        <string>Birthdate</string>
        </property>
       </widget>
      </item>
      <item row="2" column="1">
-      <widget class="QDateEdit" name="de_client_birthdate">
-       <property name="displayFormat">
-        <string>dd-MM-yyyy</string>
-       </property>
-       <property name="calendarPopup">
-        <bool>true</bool>
-       </property>
+      <widget class="QDateEdit" name="de_birthdate">
        <property name="date">
         <date>
          <year>2013</year>
@@ -144,17 +125,23 @@
          <day>1</day>
         </date>
        </property>
+       <property name="displayFormat">
+        <string>dd-MM-yyyy</string>
+       </property>
+       <property name="calendarPopup">
+        <bool>true</bool>
+       </property>
       </widget>
      </item>
      <item row="3" column="0">
       <widget class="QLabel" name="label_4">
        <property name="text">
-        <string>Город</string>
+        <string>City</string>
        </property>
       </widget>
      </item>
      <item row="3" column="1">
-      <widget class="QLineEdit" name="le_client_city">
+      <widget class="QLineEdit" name="le_city">
        <property name="minimumSize">
         <size>
          <width>251</width>
@@ -172,12 +159,12 @@
      <item row="4" column="0">
       <widget class="QLabel" name="label_26">
        <property name="text">
-        <string>Улица</string>
+        <string>Street</string>
        </property>
       </widget>
      </item>
      <item row="4" column="1">
-      <widget class="QLineEdit" name="le_client_street">
+      <widget class="QLineEdit" name="le_street">
        <property name="minimumSize">
         <size>
          <width>251</width>
@@ -195,12 +182,28 @@
      <item row="5" column="0">
       <widget class="QLabel" name="label_5">
        <property name="text">
-        <string>Телефон</string>
+        <string>Phone</string>
        </property>
       </widget>
      </item>
      <item row="5" column="1">
-      <widget class="QLineEdit" name="le_client_phone">
+      <widget class="QLineEdit" name="le_phone">
+       <property name="minimumSize">
+        <size>
+         <width>251</width>
+         <height>0</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>251</width>
+         <height>16777215</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="QLineEdit" name="le_name">
        <property name="minimumSize">
         <size>
          <width>251</width>

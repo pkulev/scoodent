@@ -5,7 +5,7 @@ from datetime import date
 from PyQt4 import uic
 from PyQt4.QtCore import QDate
 from PyQt4.QtGui import (
-    QDialog, QItemSelectionModel, QLineEdit, QLabel, QMainWindow,
+    QDialog, QItemSelectionModel, QLineEdit, QMainWindow,
     QMessageBox, QPushButton, QTableWidgetItem, QVBoxLayout
 )
 
@@ -23,6 +23,7 @@ def to_datetime(qdate):
     """Return datetime.date object from QDate."""
 
     return date(day=qdate.day(), month=qdate.month(), year=qdate.year())
+
 
 class DeleteDialog(QDialog):
     """Represents dialog for delete confirmation."""
@@ -75,9 +76,9 @@ class TicketDialog(QDialog):
             "client": client,
             "place": place,
             "organisation": organisation,
-            "order_date": datetime.date(2016, 6, 23),  # self.le_ticket_order_d
-            "incoming_date": datetime.date(2016, 6, 25),
-            "departure_date": datetime.date(2016, 6, 30),
+            "order_date": date(2016, 6, 23),  # self.le_ticket_order_d
+            "incoming_date": date(2016, 6, 25),
+            "departure_date": date(2016, 6, 30),
             "table_num": 100,
             "cost": 17000
         }
@@ -98,24 +99,31 @@ class ClientDialog(QDialog):
         self.client_id = model_id
         self.pb_add_client.clicked.connect(self.add_client)
 
+        self.load_client_info()
+
     def load_client_info(self):
         """Get all needed info from DB."""
 
-        session.db.get_session()
+        session = db.get_session()
         client = session.query(Client).filter(
             Client.id == self.client_id
         ).first()
 
-       # self.lab_
+        self.le_name.setText(client.name)
+        self.le_surname.setText(client.surname)
+        self.de_birthdate.setDate(from_datetime(client.birthdate))
+        self.le_city.setText(client.city)
+        self.le_street.setText(client.street)
+        self.le_phone.setText(client.phone)
 
     def add_client(self):
         client = {
-            "name": str(self.le_client_name.text()),
-            "surname": str(self.le_client_surname.text()),
-            "birthdate": datetime.date(2016, 6, 12),
-            "city": str(self.le_client_city.text()),
-            "street": str(self.le_client_street.text()),
-            "phone": str(self.le_client_phone.text()),
+            "name": str(self.le_name.text()),
+            "surname": str(self.le_surname.text()),
+            "birthdate": to_datetime(self.de_birthdate.date()),
+            "city": str(self.le_city.text()),
+            "street": str(self.le_street.text()),
+            "phone": str(self.le_phone.text()),
         }
 
         if not all(client.values()):
