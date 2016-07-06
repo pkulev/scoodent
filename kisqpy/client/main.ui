@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1017</width>
-    <height>514</height>
+    <height>606</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -19,7 +19,7 @@
   <property name="minimumSize">
    <size>
     <width>1017</width>
-    <height>479</height>
+    <height>606</height>
    </size>
   </property>
   <property name="windowTitle">
@@ -32,7 +32,7 @@
       <x>10</x>
       <y>50</y>
       <width>1001</width>
-      <height>361</height>
+      <height>511</height>
      </rect>
     </property>
     <property name="sizePolicy">
@@ -63,26 +63,13 @@
      <bool>true</bool>
     </attribute>
    </widget>
-   <widget class="QPushButton" name="pb_add_client">
+   <widget class="QWidget" name="">
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>420</y>
-      <width>80</width>
-      <height>22</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>ADD CLIENT</string>
-    </property>
-   </widget>
-   <widget class="QWidget" name="layoutWidget">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>10</y>
-      <width>411</width>
-      <height>31</height>
+      <y>3</y>
+      <width>673</width>
+      <height>41</height>
      </rect>
     </property>
     <layout class="QHBoxLayout" name="horizontalLayout">
@@ -120,20 +107,35 @@
        </property>
       </widget>
      </item>
+     <item>
+      <widget class="QPushButton" name="pb_add_client">
+       <property name="text">
+        <string>Add client</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pb_add_ticket">
+       <property name="text">
+        <string>Add ticket</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pb_add_organisation">
+       <property name="text">
+        <string>Add organisation</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pb_view_and_modify">
+       <property name="text">
+        <string>View &amp;&amp; Modify</string>
+       </property>
+      </widget>
+     </item>
     </layout>
-   </widget>
-   <widget class="QPushButton" name="pb_add_ticket">
-    <property name="geometry">
-     <rect>
-      <x>100</x>
-      <y>420</y>
-      <width>80</width>
-      <height>22</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>ADD TICKET</string>
-    </property>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
@@ -147,17 +149,47 @@
    </property>
    <widget class="QMenu" name="menuFile">
     <property name="title">
-     <string>File</string>
+     <string>Main menu</string>
     </property>
     <addaction name="separator"/>
     <addaction name="action_exit"/>
    </widget>
+   <widget class="QMenu" name="menuTools">
+    <property name="title">
+     <string>Tools</string>
+    </property>
+    <widget class="QMenu" name="menuDB_Tools">
+     <property name="title">
+      <string>DB Tools</string>
+     </property>
+     <addaction name="actionDrop_database"/>
+     <addaction name="actionCreate_schema"/>
+     <addaction name="actionGenerate_testing"/>
+    </widget>
+    <addaction name="menuDB_Tools"/>
+   </widget>
    <addaction name="menuFile"/>
+   <addaction name="menuTools"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="action_exit">
    <property name="text">
     <string>Exit</string>
+   </property>
+  </action>
+  <action name="actionDrop_database">
+   <property name="text">
+    <string>Drop database</string>
+   </property>
+  </action>
+  <action name="actionCreate_schema">
+   <property name="text">
+    <string>Create schema</string>
+   </property>
+  </action>
+  <action name="actionGenerate_testing">
+   <property name="text">
+    <string>Generate testing</string>
    </property>
   </action>
  </widget>

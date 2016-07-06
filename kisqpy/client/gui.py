@@ -1,9 +1,9 @@
 """GUI widgets."""
 
-import datetime
+from datetime import date
 
 from PyQt4 import uic
-from PyQt4.QtCore import Qt
+from PyQt4.QtCore import QDate
 from PyQt4.QtGui import (
     QDialog, QItemSelectionModel, QLineEdit, QLabel, QMainWindow,
     QMessageBox, QPushButton, QTableWidgetItem, QVBoxLayout
@@ -12,6 +12,17 @@ from PyQt4.QtGui import (
 from kisqpy.common import db, config
 from kisqpy.models import Client, Ticket, Departure, Organisation
 
+
+def from_datetime(date):
+    """Return QDate object from datetime.date."""
+
+    return QDate(date.year, date.month, date.day)
+
+
+def to_datetime(qdate):
+    """Return datetime.date object from QDate."""
+
+    return date(day=qdate.day(), month=qdate.month(), year=qdate.year())
 
 class DeleteDialog(QDialog):
     """Represents dialog for delete confirmation."""
@@ -30,6 +41,7 @@ def required_field_empty_warning(parent, msg="One or more fields are empty."):
 
 
 class TicketDialog(QDialog):
+    """Implements ticket interaction."""
 
     def __init__(self, model_id):
         QDialog.__init__(self)
@@ -50,7 +62,11 @@ class TicketDialog(QDialog):
         self.lab_client.setText(str(ticket.client_id))  # replace by short info
         self.lab_organisation.setText(str(ticket.org_id))  # replace by name
         self.lab_place.setText(str(ticket.place_id))  # replace by info
-        # self.de_order_date  # TODO
+        self.de_order_date.setDate(from_datetime(ticket.order_date))
+        self.de_incoming_date.setDate(from_datetime(ticket.incoming_date))
+        self.de_departure_date.setDate(from_datetime(ticket.departure_date))
+        self.lab_table_num.setText(str(ticket.table_num))
+        self.lab_cost.setText(str(ticket.cost))
 
     def add_ticket(self, client, place, organisation=None):
         """Insert new ticket to DB."""
@@ -73,6 +89,7 @@ class TicketDialog(QDialog):
 
 
 class ClientDialog(QDialog):
+    """Implements client interaction."""
 
     def __init__(self, model_id):
         QDialog.__init__(self)
@@ -148,8 +165,11 @@ class MainWindow(QMainWindow):
         self.rb_departure.clicked.connect(lambda: self.show_table(Departure))
         self.rb_organisation.clicked.connect(lambda: self.show_table(Organisation))
 
+        # TODO
         self.table_widget.cellClicked.connect(self.select_table_row)
         self.table_widget.cellDoubleClicked.connect(self.open_table_info)
+        # TODO: get current selection or QMessageBox.error/ignore
+        self.pb_view_and_modify.clicked.connect(self.open_table_info)
 
         self.show_table(self.model)
 
