@@ -29,13 +29,13 @@ def required_field_empty_warning(parent, msg="One or more fields are empty."):
     QMessageBox.warning(parent, "Error", msg)
 
 
-class TicketInfoDialog(QDialog):
+class TicketDialog(QDialog):
 
-    def __init__(self, ticket_id):
+    def __init__(self, model_id):
         QDialog.__init__(self)
-        uic.loadUi(config.UI["ticket_info_dialog"], self)
+        uic.loadUi(config.UI["ticket_dialog"], self)
 
-        self.ticket_id = ticket_id
+        self.ticket_id = model_id
         self.load_ticket_info()
 
     def load_ticket_info(self):
@@ -51,136 +51,6 @@ class TicketInfoDialog(QDialog):
         self.lab_organisation.setText(str(ticket.org_id))  # replace by name
         self.lab_place.setText(str(ticket.place_id))  # replace by info
         # self.de_order_date  # TODO
-
-
-class ClientAddDialog(QDialog):
-
-    def __init__(self):
-        QDialog.__init__(self)
-        uic.loadUi(config.UI["client_add_dialog"], self)
-
-        self.pb_add_client.clicked.connect(self.add_client)
-
-    def add_client(self):
-        client = {
-            "name": str(self.le_client_name.text()),
-            "surname": str(self.le_client_surname.text()),
-            "birthdate": datetime.date(2016, 6, 12),
-            "city": str(self.le_client_city.text()),
-            "street": str(self.le_client_street.text()),
-            "phone": str(self.le_client_phone.text()),
-        }
-
-        if not all(client.values()):
-            required_field_empty_warning(self)
-        else:
-            self.insert_objects(Client(**client))
-
-
-class MainWindow(QMainWindow):
-
-    def __init__(self):
-        QMainWindow.__init__(self)
-        uic.loadUi(config.UI["main"], self)
-
-        self.action_exit.triggered.connect(self.close)
-        self.pb_show_table.clicked.connect(self.show_table)
-
-        # TODO
-        self.pb_add_client.clicked.connect(lambda: ClientAddDialog().exec_())
-
-        self.rb_client.clicked.connect(self.rb_to_pb_client)
-        self.rb_ticket.clicked.connect(self.rb_to_pb_ticket)
-        self.rb_departure.clicked.connect(self.rb_to_pb_departure)
-        self.rb_organisation.clicked.connect(self.rb_to_pb_organisation)
-
-        self.pb_add_ticket.clicked.connect(self.add_ticket)
-        self.pb_add_organisation.clicked.connect(self.add_organisation)
-
-        self.pb_del_client.clicked.connect(self.del_client)
-        self.pb_del_organisation.clicked.connect(self.del_organisation)
-        self.pb_del_ticket.clicked.connect(self.del_ticket)
-
-        self.pb_change_client.clicked.connect(self.change_client)
-        self.pb_change_organisation.clicked.connect(self.change_organisation)
-        self.pb_change_ticket.clicked.connect(self.change_ticket)
-
-        self.table_widget.cellClicked.connect(self.select_table_row)
-        self.table_widget.cellDoubleClicked.connect(self.open_ticket_info)
-
-        self.show_table()
-
-    @staticmethod
-    def insert_objects(obj):
-        """Insert object or objects to DB."""
-
-        session = db.get_session()
-        if isinstance(obj, (tuple, list)):
-            session.add_all(obj)
-        else:
-            session.add(obj)
-        session.commit()
-
-    def show_table(self):
-        def get_table_choise():
-            choises = {
-                self.rb_client: Client,
-                self.rb_ticket: Ticket,
-                self.rb_departure: Departure,
-                self.rb_organisation: Organisation,
-            }
-
-            for rb, res in choises.items():
-                if rb.isChecked():
-                    return res
-
-        def column_names(model):
-            """Extract column names from table."""
-
-            return model.__table__.columns.keys()
-
-        session = db.get_session()
-        model = get_table_choise()
-        names = column_names(model)
-        data = list(session.query(model))
-
-        rows = len(data)
-        columns = len(names)
-        self.table_widget.clear()
-        self.table_widget.setSortingEnabled(True)
-        self.table_widget.setRowCount(rows)
-        self.table_widget.setColumnCount(columns)
-        self.table_widget.setHorizontalHeaderLabels(names)
-        # self.table_widget.sortByColumn(0, Qt.AscendingOrder)
-
-        for i in range(rows):
-            for j in range(columns):
-                item = QTableWidgetItem(str(data[i].__dict__[names[j]]))
-                self.table_widget.setItem(i, j, item)
-
-    def select_table_row(self, row, column):
-        """Select current table row."""
-
-        # self.table_widget.setCurrentIndex(
-        #     (row, column), QItemSelectionModel.NoUpdate)
-
-    def open_ticket_info(self, row, column):
-        """Open current ticket info window."""
-
-        ticket_id = int(self.table_widget.item(row, 0).text())
-        TicketInfoDialog(ticket_id=ticket_id).exec_()
-
-    def rb_to_pb_client(self):
-        self.pb_show_table.setText("Show client table")
-
-    def rb_to_pb_ticket(self):
-        self.pb_show_table.setText("Show ticket table")
-
-    def rb_to_pb_departure(self):
-        self.pb_show_table.setText("Show departure table")
-
-    def rb_to_pb_organisation(self):
-        self.pb_show_table.setText("Show organisation table")
 
     def add_ticket(self, client, place, organisation=None):
         """Insert new ticket to DB."""
@@ -199,7 +69,55 @@ class MainWindow(QMainWindow):
         if not all(ticket.values()):
             required_field_empty_warning(self)
         else:
-            self.insert_objects(Ticket(**ticket))
+            db.insert_objects(Ticket(**ticket))
+
+
+class ClientDialog(QDialog):
+
+    def __init__(self, model_id):
+        QDialog.__init__(self)
+        uic.loadUi(config.UI["client_dialog"], self)
+
+        self.client_id = model_id
+        self.pb_add_client.clicked.connect(self.add_client)
+
+    def load_client_info(self):
+        """Get all needed info from DB."""
+
+        session.db.get_session()
+        client = session.query(Client).filter(
+            Client.id == self.client_id
+        ).first()
+
+       # self.lab_
+
+    def add_client(self):
+        client = {
+            "name": str(self.le_client_name.text()),
+            "surname": str(self.le_client_surname.text()),
+            "birthdate": datetime.date(2016, 6, 12),
+            "city": str(self.le_client_city.text()),
+            "street": str(self.le_client_street.text()),
+            "phone": str(self.le_client_phone.text()),
+        }
+
+        if not all(client.values()):
+            required_field_empty_warning(self)
+        else:
+            db.insert_objects(Client(**client))
+
+
+class OrganisationDialog(QDialog):
+
+    def __init__(self, model_id):
+        QDialog.__init__(self)
+        uic.loadUi(config.UI["organisation_dialog"], self)
+
+        self.organisation_id = model_id
+        self.pb_add_organisation.clicked.connect(self.add_organisation)
+
+    def load_organisation_info(self):
+        pass
 
     def add_organisation(self):
         """Insert new organisation to DB."""
@@ -208,8 +126,74 @@ class MainWindow(QMainWindow):
         if not name:
             required_field_empty_warning(self)
         else:
-            org = Organisation(name=name)
-            self.insert_objects(org)  # Organisation(name=name))
+            db.insert_objects(Organisation(name=name))
+
+
+class MainWindow(QMainWindow):
+
+    def __init__(self):
+        QMainWindow.__init__(self)
+        uic.loadUi(config.UI["main"], self)
+
+        self.model = Ticket
+
+        self.action_exit.triggered.connect(self.close)
+
+        # TODO
+        self.pb_add_client.clicked.connect(lambda: ClientDialog(1).exec_())
+        self.pb_add_ticket.clicked.connect(lambda: TicketDialog(1).exec_())
+
+        self.rb_client.clicked.connect(lambda: self.show_table(Client))
+        self.rb_ticket.clicked.connect(lambda: self.show_table(Ticket))
+        self.rb_departure.clicked.connect(lambda: self.show_table(Departure))
+        self.rb_organisation.clicked.connect(lambda: self.show_table(Organisation))
+
+        self.table_widget.cellClicked.connect(self.select_table_row)
+        self.table_widget.cellDoubleClicked.connect(self.open_table_info)
+
+        self.show_table(self.model)
+
+    def show_table(self, model):
+        """Show all entries of model in table."""
+
+        self.model = model
+        session = db.get_session()
+        names = model.__table__.columns.keys()
+        data = list(session.query(model))
+
+        rows = len(data)
+        cols = len(names)
+        self.table_widget.clear()
+        self.table_widget.setSortingEnabled(True)
+        self.table_widget.setRowCount(rows)
+        self.table_widget.setColumnCount(cols)
+        self.table_widget.setHorizontalHeaderLabels(names)
+        # self.table_widget.sortByColumn(0, Qt.AscendingOrder)
+
+        for row in range(rows):
+            for col in range(cols):
+                item = QTableWidgetItem(str(data[row].__dict__[names[col]]))
+                self.table_widget.setItem(row, col, item)
+
+
+    def select_table_row(self, row, column):
+        """Select current table row."""
+
+        # self.table_widget.setCurrentIndex(
+        #     (row, column), QItemSelectionModel.NoUpdate)
+
+    def open_table_info(self, row, column):
+        """Open current table info window."""
+
+        model_dialog_map = {
+            Client: ClientDialog,
+            Ticket: TicketDialog,
+            Organisation: OrganisationDialog,
+        }
+
+        dialog = model_dialog_map.get(self.model)
+        model_id = int(self.table_widget.item(row, 0).text())
+        dialog(model_id=model_id).exec_()
 
     def addProjectToDB(self):
         def parseDate(original):
@@ -237,152 +221,6 @@ class MainWindow(QMainWindow):
         Project.CreationProg = str(self.cb_projectCreationProg.currentText())
         Project.RenderProg = str(self.cb_projectRenderProg.currentText())
         Project.SendForm = str(self.cb_projectSendForm.currentText())
-        if (Project.CreatorID == "" or Project.ClientID == "" or Project.Time == ""):
-            QMessageBox.warning(
-                self,
-                "Error",
-                "One or more fields are empty!")
-        else:
-            query = """INSERT INTO project (creatorID, clientID, openDate, closeDate,
-                                            time, creationProg, renderProg, sendForm)
-                       VALUES ({creator}, {client}, {od}, {cd}, {t}, {cp}, {rp}, {sf});
-                    """.format(creator=repr(Project.CreatorID),
-                               client=repr(Project.ClientID),
-                               od=repr(Project.OpenDate),
-                               cd=repr(Project.CloseDate),
-                               #without repr because in DB - int
-                               t=Project.Time,
-                               cp=repr(Project.CreationProg),
-                               rp=repr(Project.RenderProg),
-                               sf=repr(Project.SendForm))
-
-            try:
-                self.connectToDB("model", "most")
-                cur = self.conn.cursor()
-                cur.execute(query)
-                self.conn.commit()
-            except ps2.DatabaseError as e:
-                if self.conn:
-                    self.conn.rollback()
-                    QMessageBox.warning(self, "Error", str(e))
-            finally:
-                self.disconnect()
-
-    def abstractDel(
-            self, table, object_id=None, surname=None, name=None):
-        if surname is None and name is None and object_id:
-            query = "DELETE FROM {t} WHERE id = {i}".format(t=table, i=object_id)
-        elif surname and name and object_id is None:
-            query = "DELETE FROM {t} WHERE surname = {s} AND name = {n}".format(
-                t=table,
-                s=repr(surname),
-                n=repr(name))
-        else:
-            QMessageBox(self, "Error", "One field is empty")
-            return
-
-        try:
-            self.connectToDB("model", "most")
-            cur = self.conn.cursor()
-            cur.execute(query)
-            self.conn.commit()
-        except ps2.DatabaseError as e:
-            if self.conn:
-                QMessageBox(self, "Error", str(e))
-                self.conn.rollback()
-        finally:
-            self.disconnect()
-
-    def delClient(self):
-        # get info
-
-        if self.rb_delClientByID.isChecked():
-            clientID = str(self.le_delClientID.text())
-            clientSurname = None
-            clientName = None
-        else:
-            clientSurname = str(self.le_delClientSurname.text())
-            clientName = str(self.le_delClientName.text())
-            clientID = None
-
-        # set parameters
-        w = DeleteDialog("this record", "client")
-        if w.exec_() == QDialog.Accepted:
-            self.abstractDel("client", clientID, clientSurname, clientName)
-            self.show_table()
-
-    def del_client(self):
-        """Delete client."""
-
-        w = DeleteDialog("this record", "client")
-        if w.exec_() == QDialog.Accepted:
-            self.abstractDel("client", clientID, clientSurname, clientName)
-            self.show_table()
-
-    def del_organisation(self):
-        """Delete organisation."""
-
-        pass
-
-    def del_ticket(self):
-        """Delete ticket."""
-
-        pass
-
-    def abstractChange(self, table, field, target, ident):
-        query = "UPDATE {T} SET {f} = {t} WHERE id = {i}".format(
-            T=table,
-            f=field,
-            t=repr(target),
-            i=ident)
-        try:
-            self.connectToDB("model", "most")
-            cur = self.conn.cursor()
-            cur.execute(query)
-            self.conn.commit()
-        except ps2.DatabaseError as e:
-            QMessageBox.warning(self, "Error", str(e))
-            if self.conn:
-                self.conn.rollback()
-        finally:
-            self.conn.close
-
-    def change_client(self):
-        pass
-
-    def change_organisation(self):
-        pass
-
-    def change_ticket(self):
-        pass
-
-    def changeClient(self):
-        table = "client"
-        ident = str(self.le_changeClientID.text())
-        field = str(self.cb_changeClientField.currentItem())
-        target = str(self.le_changeClientTarget.text())
-        self.abstractChange(table, field, target, ident)
-        self.rb_client.setEnabled(True)
-        self.show_table()
-
-    def changeCreator(self):
-        table = "creator"
-        ident = str(self.le_changeCreatorID.text())
-        field = str(self.cb_changeCreatorField.currentText())
-        target = str(self.le_changeCreatorTarget.text())
-        self.abstractChange(table, field, target, ident)
-        self.rb_creator.setEnabled(True)
-        self.show_table()
-
-    def changeProject(self):
-        table = "project"
-        ident = str(self.le_changeProjectID.text())
-        field = str(self.cb_changeProjectField.currentText())
-        target = str(self.le_changeProjectTarget.text())
-        self.abstractChange(table, field, target, ident)
-        self.rb_project.setEnabled(True)
-        self.show_table()
-
 
 def login(login):
     l = login()

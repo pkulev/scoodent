@@ -23,3 +23,14 @@ def get_session(debug=None):
     engine = get_engine(debug)
     Base.metadata.bind = engine
     return sessionmaker(bind=engine)()
+
+
+def insert_objects(obj):
+    """Insert object or objects to DB."""
+
+    session = get_session()
+    if isinstance(obj, (tuple, list)):
+        session.add_all(obj)
+    else:
+        session.add(obj)
+    session.commit()

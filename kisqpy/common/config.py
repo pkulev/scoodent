@@ -66,9 +66,10 @@ UI_DIR = partial(os.path.join, os.path.join(ROOT, "client"))
 """Helper partial."""
 
 UI = {
-    "client_add_dialog": UI_DIR("client_add_dialog.ui"),
-    "delete_dialog": UI_DIR("delete_dialog.ui"),
     "main": UI_DIR("main.ui"),
-    "ticket_info_dialog": UI_DIR("ticket_info_dialog.ui"),
+    "client_dialog": UI_DIR("client_dialog.ui"),
+    "delete_dialog": UI_DIR("delete_dialog.ui"),
+    "organisation_dialog": UI_DIR("organisation_dialog.ui"),
+    "ticket_dialog": UI_DIR("ticket_dialog.ui"),
 }
 """Widget <-> path to .ui mapping."""
