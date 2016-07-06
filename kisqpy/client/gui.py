@@ -42,7 +42,9 @@ class TicketInfoDialog(QDialog):
         """Get all needed info from DB."""
 
         session = db.get_session()
-        ticket = session.query(Ticket).filter(Ticket.id == ticket_id).first()
+        ticket = session.query(Ticket).filter(
+            Ticket.id == self.ticket_id
+        ).first()
 
         self.lab_ticket_id.setText(str(ticket.id))
         self.lab_client.setText(str(ticket.client_id))  # replace by short info
@@ -103,8 +105,8 @@ class MainWindow(QMainWindow):
         self.pb_change_organisation.clicked.connect(self.change_organisation)
         self.pb_change_ticket.clicked.connect(self.change_ticket)
 
-        self.tableWidget.cellClicked.connect(self.select_table_row)
-        self.tableWidget.cellDoubleClicked.connect(self.open_ticket_info)
+        self.table_widget.cellClicked.connect(self.select_table_row)
+        self.table_widget.cellDoubleClicked.connect(self.open_ticket_info)
 
         self.show_table()
 
@@ -144,28 +146,28 @@ class MainWindow(QMainWindow):
 
         rows = len(data)
         columns = len(names)
-        self.tableWidget.clear()
-        self.tableWidget.setSortingEnabled(True)
-        self.tableWidget.setRowCount(rows)
-        self.tableWidget.setColumnCount(columns)
-        self.tableWidget.setHorizontalHeaderLabels(names)
-        # self.tableWidget.sortByColumn(0, Qt.AscendingOrder)
+        self.table_widget.clear()
+        self.table_widget.setSortingEnabled(True)
+        self.table_widget.setRowCount(rows)
+        self.table_widget.setColumnCount(columns)
+        self.table_widget.setHorizontalHeaderLabels(names)
+        # self.table_widget.sortByColumn(0, Qt.AscendingOrder)
 
         for i in range(rows):
             for j in range(columns):
                 item = QTableWidgetItem(str(data[i].__dict__[names[j]]))
-                self.tableWidget.setItem(i, j, item)
+                self.table_widget.setItem(i, j, item)
 
     def select_table_row(self, row, column):
         """Select current table row."""
 
-        self.tableWidget.setCurrentIndex(
-            (row, column), QItemSelectionModel.NoUpdate)
+        # self.table_widget.setCurrentIndex(
+        #     (row, column), QItemSelectionModel.NoUpdate)
 
     def open_ticket_info(self, row, column):
         """Open current ticket info window."""
 
-        ticket_id = int(self.tableWidget.item(row + 1, 0).text())
+        ticket_id = int(self.table_widget.item(row, 0).text())
         TicketInfoDialog(ticket_id=ticket_id).exec_()
 
     def rb_to_pb_client(self):
