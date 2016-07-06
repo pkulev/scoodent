@@ -40,7 +40,6 @@ class Money(UserDefinedType):
                 trimpoint = 1
                 sign = ""
 
-            raise Exception(value)
             parsed = "".join(
                 list(filter(lambda it: it.isdigit(), value[trimpoint:])))
 
