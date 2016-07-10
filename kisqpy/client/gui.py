@@ -167,6 +167,7 @@ class MainWindow(QMainWindow):
         # TODO
         self.pb_add_client.clicked.connect(lambda: ClientDialog(1).exec_())
         self.pb_add_ticket.clicked.connect(lambda: TicketDialog(1).exec_())
+        self.pb_add_organisation.clicked.connect(lambda: OrganisationDialog(1).exec_())
 
         self.rb_client.clicked.connect(lambda: self.show_table(Client))
         self.rb_ticket.clicked.connect(lambda: self.show_table(Ticket))
@@ -177,7 +178,7 @@ class MainWindow(QMainWindow):
         self.table_widget.cellClicked.connect(self.select_table_row)
         self.table_widget.cellDoubleClicked.connect(self.open_table_info)
         # TODO: get current selection or QMessageBox.error/ignore
-        self.pb_view_and_modify.clicked.connect(self.open_table_info)
+        self.pb_view_and_modify.clicked.connect(self.table_widget.cellDoubleClicked)  # self.open_table_info)
 
         self.show_table(self.model)
 

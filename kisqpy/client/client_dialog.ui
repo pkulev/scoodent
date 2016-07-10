@@ -32,10 +32,10 @@
   <widget class="QGroupBox" name="groupBox">
    <property name="geometry">
     <rect>
-     <x>10</x>
+     <x>20</x>
      <y>20</y>
-     <width>451</width>
-     <height>301</height>
+     <width>449</width>
+     <height>251</height>
     </rect>
    </property>
    <property name="minimumSize">
@@ -51,13 +51,13 @@
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>260</y>
+      <y>220</y>
       <width>97</width>
       <height>27</height>
      </rect>
     </property>
     <property name="text">
-     <string>Add client</string>
+     <string>Добавить</string>
     </property>
     <property name="checkable">
      <bool>false</bool>
@@ -71,23 +71,20 @@
      <rect>
       <x>20</x>
       <y>30</y>
-      <width>341</width>
-      <height>201</height>
+      <width>369</width>
+      <height>185</height>
      </rect>
     </property>
-    <layout class="QFormLayout" name="formLayout">
-     <property name="fieldGrowthPolicy">
-      <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
-     </property>
-     <item row="0" column="0">
+    <layout class="QGridLayout" name="gridLayout">
+     <item row="1" column="0">
       <widget class="QLabel" name="label">
        <property name="text">
         <string>Surname</string>
        </property>
       </widget>
      </item>
-     <item row="0" column="1">
-      <widget class="QLineEdit" name="le_surname">
+     <item row="1" column="1">
+      <widget class="QLineEdit" name="le_client_surname">
        <property name="minimumSize">
         <size>
          <width>251</width>
@@ -102,22 +99,44 @@
        </property>
       </widget>
      </item>
-     <item row="1" column="0">
+     <item row="2" column="0">
       <widget class="QLabel" name="label_2">
        <property name="text">
         <string>Name</string>
        </property>
       </widget>
      </item>
-     <item row="2" column="0">
+     <item row="2" column="1">
+      <widget class="QLineEdit" name="le_client_name">
+       <property name="minimumSize">
+        <size>
+         <width>251</width>
+         <height>0</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>251</width>
+         <height>16777215</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="0">
       <widget class="QLabel" name="label_3">
        <property name="text">
         <string>Birthdate</string>
        </property>
       </widget>
      </item>
-     <item row="2" column="1">
-      <widget class="QDateEdit" name="de_birthdate">
+     <item row="3" column="1">
+      <widget class="QDateEdit" name="de_client_birthdate">
+       <property name="displayFormat">
+        <string>dd-MM-yyyy</string>
+       </property>
+       <property name="calendarPopup">
+        <bool>true</bool>
+       </property>
        <property name="date">
         <date>
          <year>2013</year>
@@ -125,23 +144,10 @@
          <day>1</day>
         </date>
        </property>
-       <property name="displayFormat">
-        <string>dd-MM-yyyy</string>
-       </property>
-       <property name="calendarPopup">
-        <bool>true</bool>
-       </property>
       </widget>
      </item>
-     <item row="3" column="0">
-      <widget class="QLabel" name="label_4">
-       <property name="text">
-        <string>City</string>
-       </property>
-      </widget>
-     </item>
-     <item row="3" column="1">
-      <widget class="QLineEdit" name="le_city">
+     <item row="4" column="1">
+      <widget class="QLineEdit" name="le_client_city">
        <property name="minimumSize">
         <size>
          <width>251</width>
@@ -157,14 +163,14 @@
       </widget>
      </item>
      <item row="4" column="0">
-      <widget class="QLabel" name="label_26">
+      <widget class="QLabel" name="label_4">
        <property name="text">
-        <string>Street</string>
+        <string>City</string>
        </property>
       </widget>
      </item>
-     <item row="4" column="1">
-      <widget class="QLineEdit" name="le_street">
+     <item row="5" column="1">
+      <widget class="QLineEdit" name="le_client_street">
        <property name="minimumSize">
         <size>
          <width>251</width>
@@ -180,41 +186,46 @@
       </widget>
      </item>
      <item row="5" column="0">
+      <widget class="QLabel" name="label_26">
+       <property name="text">
+        <string>Street</string>
+       </property>
+      </widget>
+     </item>
+     <item row="6" column="1">
+      <widget class="QLineEdit" name="le_client_phone">
+       <property name="minimumSize">
+        <size>
+         <width>251</width>
+         <height>0</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>251</width>
+         <height>16777215</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+     <item row="6" column="0">
       <widget class="QLabel" name="label_5">
        <property name="text">
         <string>Phone</string>
        </property>
       </widget>
      </item>
-     <item row="5" column="1">
-      <widget class="QLineEdit" name="le_phone">
-       <property name="minimumSize">
-        <size>
-         <width>251</width>
-         <height>0</height>
-        </size>
-       </property>
-       <property name="maximumSize">
-        <size>
-         <width>251</width>
-         <height>16777215</height>
-        </size>
+     <item row="0" column="0">
+      <widget class="QLabel" name="label_6">
+       <property name="text">
+        <string>Client №</string>
        </property>
       </widget>
      </item>
-     <item row="1" column="1">
-      <widget class="QLineEdit" name="le_name">
-       <property name="minimumSize">
-        <size>
-         <width>251</width>
-         <height>0</height>
-        </size>
-       </property>
-       <property name="maximumSize">
-        <size>
-         <width>251</width>
-         <height>16777215</height>
-        </size>
+     <item row="0" column="1" alignment="Qt::AlignHCenter">
+      <widget class="QLabel" name="lab_client_id">
+       <property name="text">
+        <string/>
        </property>
       </widget>
      </item>
