@@ -1,8 +1,9 @@
 """GUI client application."""
 
+import os
 import sys
 
-from PyQt4 import QtGui
+from PyQt4.QtGui import QApplication
 
 from kisqpy.client.gui import LoginWindow, MainWindow
 
@@ -10,12 +11,12 @@ from kisqpy.client.gui import LoginWindow, MainWindow
 def main():
     """Entry point."""
 
-    app = QtGui.QApplication(sys.argv)
+    app = QApplication(sys.argv)
     if LoginWindow.do_login():
         main_window = MainWindow()
         main_window.show()
         return app.exec_()
-    return 1
+    return os.EX_SOFWARE
 
 
 if __name__ == "__main__":
