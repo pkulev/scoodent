@@ -40,7 +40,7 @@ class Student(Base):
     school = Column(String(32), nullable=False)
     enter_date = Column(Date, nullable=False)
     student_group_id = Column(
-        Integer, ForeignKey("student_group.id"))
+        Integer, ForeignKey("student_group.id", ondelete="cascade"))
     student_group = relationship("StudentGroup")
 
 
@@ -53,8 +53,10 @@ class Report(Base):
     mark = Column(Integer)  # TODO: nullable?
     mark_date = Column(Date)  # TODO: nullable?
     report_type = Column(TReport)  # TODO: nullable?
-    discipline_id = Column(Integer, ForeignKey("discipline.id"))
-    student_id = Column(Integer, ForeignKey("student.id"), unique=True)
+    discipline_id = Column(
+        Integer, ForeignKey("discipline.id", ondelete="cascade"))
+    student_id = Column(
+        Integer, ForeignKey("student.id", ondelete="cascade"), unique=True)
     discipline = relationship("Discipline")
     student = relationship("Student")
 

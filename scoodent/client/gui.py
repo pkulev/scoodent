@@ -158,7 +158,7 @@ class DisciplineDialog(QDialog):
     def add_discipline(self):
         """Insert new discipline to DB."""
 
-        name = str(self.le_discipline_name.text())
+        name = str(self.le_name.text())
         if not name:
             required_field_empty_warning(self)
         else:
@@ -202,15 +202,27 @@ class MainWindow(QMainWindow):
         QMainWindow.__init__(self)
         uic.loadUi(config.UI["main"], self)
 
+        self.selected = None
         self.model = Student
+
+        self.dialog_by_model = {
+            Student: StudentDialog,
+            Report: ReportDialog,
+            Discipline: DisciplineDialog,
+            StudentGroup: StudentGroupDialog,
+        }
 
         self.action_exit.triggered.connect(self.close)
 
         # TODO
-        self.pb_add_student.clicked.connect(lambda: StudentDialog(1).exec_())
-        self.pb_add_report.clicked.connect(lambda: ReportDialog(1).exec_())
-        self.pb_add_discipline.clicked.connect(
-            lambda: DisciplineDialog(1).exec_())
+        def pb_add_callback():
+            """Call dialog for current model."""
+            
+            self.dialog_by_model[self.model](1).exec_()
+            self.show_table(self.model)
+
+        self.pb_add.clicked.connect(pb_add_callback)
+        self.pb_delete.clicked.connect(self.remove_selected)
 
         self.rb_student.clicked.connect(lambda: self.show_table(Student))
         self.rb_report.clicked.connect(lambda: self.show_table(Report))
@@ -250,20 +262,33 @@ class MainWindow(QMainWindow):
     def select_table_row(self, row, column):
         """Select current table row."""
 
+        self.selected = (row, column)
         # self.table_widget.setCurrentIndex(
         #     (row, column), QItemSelectionModel.NoUpdate)
+
+    def remove_selected(self):
+        """Remove selected item from current table."""
+
+        if not self.selected:
+            required_field_empty_warning(self, "Select item for removal.")
+
+        # on (row, 0) placed entity ID
+        model_id = int(self.table_widget.item(self.selected[0], 0).text())
+
+        if not DeleteDialog(
+                "item with ID = {0}".format(model_id), self.model.__tablename__
+        ).exec_() == QDialog.Accepted:
+            return
+
+        session = db.get_session()
+        session.query(self.model).filter(self.model.id == model_id).delete()
+        session.commit()
+        self.show_table(self.model)
 
     def open_table_info(self, row, column):
         """Open current table info window."""
 
-        model_dialog_map = {
-            Student: StudentDialog,
-            Report: ReportDialog,
-            Discipline: DisciplineDialog,
-            StudentGroup: StudentGroupDialog
-        }
-
-        dialog = model_dialog_map.get(self.model)
+        dialog = self.dialog_by_model.get(self.model)
         model_id = int(self.table_widget.item(row, 0).text())
         dialog(model_id=model_id).exec_()
 

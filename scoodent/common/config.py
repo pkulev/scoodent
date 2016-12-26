@@ -60,5 +60,6 @@ UI = {
     "report_dialog": UI_DIR("report_dialog.ui"),
     "discipline_dialog": UI_DIR("discipline_dialog.ui"),
     "group_dialog": UI_DIR("group_dialog.ui"),
+    "delete_dialog": UI_DIR("delete_dialog.ui"),
 }
 """Widget <-> path to .ui mapping."""

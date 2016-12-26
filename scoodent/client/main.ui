@@ -71,7 +71,7 @@
      <rect>
       <x>10</x>
       <y>3</y>
-      <width>901</width>
+      <width>548</width>
       <height>41</height>
      </rect>
     </property>
@@ -111,23 +111,16 @@
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="pb_add_student">
+      <widget class="QPushButton" name="pb_add">
        <property name="text">
-        <string>Add student</string>
+        <string>Add</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="pb_add_report">
+      <widget class="QPushButton" name="pb_delete">
        <property name="text">
-        <string>Add report</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="pb_add_discipline">
-       <property name="text">
-        <string>Add discipline</string>
+        <string>Delete</string>
        </property>
       </widget>
      </item>
@@ -147,7 +140,7 @@
      <x>0</x>
      <y>0</y>
      <width>1017</width>
-     <height>23</height>
+     <height>19</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
