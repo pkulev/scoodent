@@ -1,7 +1,7 @@
 """Constants for common use."""
 
 
-DB_NAME = "hotel"
+DB_NAME = "studentdb"
 """Application database name."""
 
 DBAPI_POSTGRES = "postgresql"

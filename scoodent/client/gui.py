@@ -9,8 +9,8 @@ from PyQt4.QtGui import (
     QMessageBox, QPushButton, QTableWidgetItem, QVBoxLayout
 )
 
-from kisqpy.common import db, config
-from kisqpy.models import Client, Ticket, Departure, Organisation
+from scoodent.common import db, config
+from scoodent.models import Client, Ticket, Departure, Organisation
 
 
 def from_datetime(date):
@@ -178,7 +178,7 @@ class MainWindow(QMainWindow):
         self.table_widget.cellClicked.connect(self.select_table_row)
         self.table_widget.cellDoubleClicked.connect(self.open_table_info)
         # TODO: get current selection or QMessageBox.error/ignore
-        self.pb_view_and_modify.clicked.connect(self.table_widget.cellDoubleClicked)  # self.open_table_info)
+        # self.pb_view_and_modify.clicked.connect(self.table_widget.cellDoubleClicked)  # self.open_table_info)
 
         self.show_table(self.model)
 
@@ -204,7 +204,6 @@ class MainWindow(QMainWindow):
                 item = QTableWidgetItem(str(data[row].__dict__[names[col]]))
                 self.table_widget.setItem(row, col, item)
 
-
     def select_table_row(self, row, column):
         """Select current table row."""
 
@@ -224,32 +223,6 @@ class MainWindow(QMainWindow):
         model_id = int(self.table_widget.item(row, 0).text())
         dialog(model_id=model_id).exec_()
 
-    def addProjectToDB(self):
-        def parseDate(original):
-            date = original[(original.index("(") + 1): original.index(")")]
-            digits = [str(i) for i in range(10)]
-            result = ""
-            for char in date:
-                if char == ",":
-                    result += "-"
-                elif char in digits:
-                    result += char
-                else:
-                    pass
-
-            return result
-
-        class Project:
-            pass
-
-        Project.CreatorID = str(self.le_projectCreatorID.text())
-        Project.ClientID = str(self.le_projectClientID.text())
-        Project.OpenDate = parseDate(str(self.de_projectOpenDate.date()))
-        Project.CloseDate = parseDate(str(self.de_projectCloseDate.date()))
-        Project.Time = str(self.sb_projectTime.text())
-        Project.CreationProg = str(self.cb_projectCreationProg.currentText())
-        Project.RenderProg = str(self.cb_projectRenderProg.currentText())
-        Project.SendForm = str(self.cb_projectSendForm.currentText())
 
 def login(login):
     l = login()

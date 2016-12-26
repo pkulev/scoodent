@@ -7,9 +7,9 @@ import sys
 
 from sqlalchemy import MetaData
 
-from kisqpy.common import db
-from kisqpy.client.shell import testing
-from kisqpy.models import Base
+from scoodent.common import db
+# from scoodent.client.shell import testing
+from scoodent.models import Base
 
 
 def create_schema(args):
@@ -40,7 +40,7 @@ def create_testing(args):
     if not args.yes:
         return
 
-    testing.generate_data(db.get_session())
+    # testing.generate_data(db.get_session())
 
 
 # TODO: refactor

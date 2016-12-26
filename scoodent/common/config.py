@@ -3,8 +3,8 @@
 import os
 from functools import partial
 
-import kisqpy
-from kisqpy.common import constants
+import scoodent
+from scoodent.common import constants
 
 
 DEBUG = True
@@ -26,9 +26,9 @@ DB_URIS = {
             "schema": constants.DBAPI_POSTGRES,
             "driver": constants.DBDRIVER_PSYCOPG2,
             "user": os.environ["USER"],
-            "password": os.environ.get("KISQPY_DB_PASS", ""),
-            "host": os.environ.get("KISQPY_DB_HOST", "localhost"),
-            "port": int(os.environ.get("KISQPY_DB_PORT", 5432)),
+            "password": os.environ.get("SCOODENT_DB_PASS", ""),
+            "host": os.environ.get("SCOODENT_DB_HOST", "localhost"),
+            "port": int(os.environ.get("SCOODENT_DB_PORT", 5432)),
             "dbname": constants.DB_NAME,
         },
     },
@@ -36,7 +36,7 @@ DB_URIS = {
         "uri": "{schema}+{driver}://{user}:{password}@{host}:{port}/{dbname}",
         "options": {
             "schema": constants.DBAPI_SQLITE,
-            "host": os.environ.get("KISQPY_DB_HOST", "localhost"),
+            "host": os.environ.get("SCOODENT_DB_HOST", "localhost"),
         },
     },
 }
@@ -48,7 +48,7 @@ DB_URI = DB_URIS[DBAPI]["uri"].format(**DB_URIS[DBAPI]["options"])
 # """Database Unified Resource Locator."""
 
 
-ROOT = os.path.dirname(kisqpy.__file__)
+ROOT = os.path.dirname(scoodent.__file__)
 """Project's root path."""
 
 MOCK_DIR = partial(os.path.join, os.path.join(ROOT, "mocks"))

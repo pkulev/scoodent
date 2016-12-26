@@ -5,7 +5,7 @@ import sys
 
 from PyQt4.QtGui import QApplication
 
-from kisqpy.client.gui import LoginWindow, MainWindow
+from scoodent.client.gui import LoginWindow, MainWindow
 
 
 def main():

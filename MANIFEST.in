@@ -1,2 +1,2 @@
-recursive-include kisqpy/mocks/ *
-recursive-include kisqpy/client/ *.ui
+recursive-include scoodent/mocks/ *
+recursive-include scoodent/client/ *.ui

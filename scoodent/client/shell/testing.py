@@ -3,9 +3,9 @@ import random
 
 from datetime import date, timedelta
 
-from kisqpy.common import config
-from kisqpy.models import (
-    CategoryEnum, Client, Departure,
+from scoodent.common import config
+from scoodent.models import (
+    TRecordEnum, Client, Departure,
     Organisation, Place, Ticket
 )
 
