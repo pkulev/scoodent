@@ -41,54 +41,6 @@ def required_field_empty_warning(parent, msg="One or more fields are empty."):
     QMessageBox.warning(parent, "Error", msg)
 
 
-class sdsdialog(QDialog):
-    """Implements ticket interaction."""
-
-    def __init__(self, model_id):
-        QDialog.__init__(self)
-        uic.loadUi(config.UI["student_dialog"], self)
-
-        self.ticket_id = model_id
-        self.load_student_info()
-
-    def load_student_info(self):
-        """Get all needed info from DB."""
-
-        session = db.get_session()
-        student = session.query(Student).filter(
-            Student.id == self.student_id
-        ).first()
-
-        self.lab_student_id.setText(str(ticket.id))
-        self.lab_client.setText(str(ticket.client_id))  # replace by short info
-        self.lab_organisation.setText(str(ticket.org_id))  # replace by name
-        self.lab_place.setText(str(ticket.place_id))  # replace by info
-        self.de_order_date.setDate(from_datetime(ticket.order_date))
-        self.de_incoming_date.setDate(from_datetime(ticket.incoming_date))
-        self.de_departure_date.setDate(from_datetime(ticket.departure_date))
-        self.lab_table_num.setText(str(ticket.table_num))
-        self.lab_cost.setText(str(ticket.cost))
-
-    def add_ticket(self, client, place, organisation=None):
-        """Insert new ticket to DB."""
-
-        ticket = {
-            "client": client,
-            "place": place,
-            "organisation": organisation,
-            "order_date": date(2016, 6, 23),  # self.le_ticket_order_d
-            "incoming_date": date(2016, 6, 25),
-            "departure_date": date(2016, 6, 30),
-            "table_num": 100,
-            "cost": 17000
-        }
-
-        if not all(ticket.values()):
-            required_field_empty_warning(self)
-        else:
-            db.insert_objects(Ticket(**ticket))
-
-
 class StudentDialog(QDialog):
     """Implements student interaction."""
 
