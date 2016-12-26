@@ -1,6 +1,6 @@
+"""Scoodent models."""
 
 from collections import namedtuple
-"""Kisqpy models."""
 
 from sqlalchemy import (
     Column, Date, Enum, ForeignKey, Integer, String, Text, Boolean
@@ -40,7 +40,7 @@ class Student(Base):
     school = Column(String(32), nullable=False)
     enter_date = Column(Date, nullable=False)
     student_group_id = Column(
-        Integer, ForeignKey("student_group.id"), unique=True)
+        Integer, ForeignKey("student_group.id"))
     student_group = relationship("StudentGroup")
 
 
@@ -50,10 +50,10 @@ class Report(Base):
     __tablename__ = "report"
 
     id = Column(Integer, primary_key=True)
-    mark = Column(Integer, nullable=False)
-    mark_date = Column(Date, nullable=False)
-    report_type = Column(TReport, nullable=False)
-    discipline_id = Column(Integer, ForeignKey("discipline.id"), unique=True)
+    mark = Column(Integer)  # TODO: nullable?
+    mark_date = Column(Date)  # TODO: nullable?
+    report_type = Column(TReport)  # TODO: nullable?
+    discipline_id = Column(Integer, ForeignKey("discipline.id"))
     student_id = Column(Integer, ForeignKey("student.id"), unique=True)
     discipline = relationship("Discipline")
     student = relationship("Student")

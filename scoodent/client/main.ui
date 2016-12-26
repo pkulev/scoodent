@@ -77,9 +77,9 @@
     </property>
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
-      <widget class="QRadioButton" name="rb_ticket">
+      <widget class="QRadioButton" name="rb_student">
        <property name="text">
-        <string>Ticket</string>
+        <string>Student</string>
        </property>
        <property name="checked">
         <bool>true</bool>
@@ -87,9 +87,9 @@
       </widget>
      </item>
      <item>
-      <widget class="QRadioButton" name="rb_client">
+      <widget class="QRadioButton" name="rb_report">
        <property name="text">
-        <string>Client</string>
+        <string>Report</string>
        </property>
        <property name="checked">
         <bool>false</bool>
@@ -97,37 +97,37 @@
       </widget>
      </item>
      <item>
-      <widget class="QRadioButton" name="rb_organisation">
+      <widget class="QRadioButton" name="rb_discipline">
        <property name="text">
-        <string>Organisation</string>
+        <string>Discipline</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QRadioButton" name="rb_departure">
+      <widget class="QRadioButton" name="rb_group">
        <property name="text">
-        <string>Departure</string>
+        <string>Group</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="pb_add_client">
+      <widget class="QPushButton" name="pb_add_student">
        <property name="text">
-        <string>Add client</string>
+        <string>Add student</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="pb_add_ticket">
+      <widget class="QPushButton" name="pb_add_report">
        <property name="text">
-        <string>Add ticket</string>
+        <string>Add report</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="pb_add_organisation">
+      <widget class="QPushButton" name="pb_add_discipline">
        <property name="text">
-        <string>Add organisation</string>
+        <string>Add discipline</string>
        </property>
       </widget>
      </item>
@@ -147,7 +147,7 @@
      <x>0</x>
      <y>0</y>
      <width>1017</width>
-     <height>21</height>
+     <height>23</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">

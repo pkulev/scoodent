@@ -51,25 +51,14 @@ DB_URI = DB_URIS[DBAPI]["uri"].format(**DB_URIS[DBAPI]["options"])
 ROOT = os.path.dirname(scoodent.__file__)
 """Project's root path."""
 
-MOCK_DIR = partial(os.path.join, os.path.join(ROOT, "mocks"))
-"""Helper partial."""
-
-MOCK = {
-    "client": MOCK_DIR("client.json"),
-    "place": MOCK_DIR("place.json"),
-    "organisation": MOCK_DIR("organisation.json"),
-}
-"""Table <-> path to json mock mapping."""
-
-
 UI_DIR = partial(os.path.join, os.path.join(ROOT, "client"))
 """Helper partial."""
 
 UI = {
     "main": UI_DIR("main.ui"),
-    "client_dialog": UI_DIR("client_dialog.ui"),
-    "delete_dialog": UI_DIR("delete_dialog.ui"),
-    "organisation_dialog": UI_DIR("organisation_dialog.ui"),
-    "ticket_dialog": UI_DIR("ticket_dialog.ui"),
+    "student_dialog": UI_DIR("student_dialog.ui"),
+    "report_dialog": UI_DIR("report_dialog.ui"),
+    "discipline_dialog": UI_DIR("discipline_dialog.ui"),
+    "group_dialog": UI_DIR("group_dialog.ui"),
 }
 """Widget <-> path to .ui mapping."""

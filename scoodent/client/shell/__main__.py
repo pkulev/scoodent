@@ -8,7 +8,7 @@ import sys
 from sqlalchemy import MetaData
 
 from scoodent.common import db
-# from scoodent.client.shell import testing
+from scoodent.client.shell import testing
 from scoodent.models import Base
 
 
@@ -40,7 +40,7 @@ def create_testing(args):
     if not args.yes:
         return
 
-    # testing.generate_data(db.get_session())
+    testing.generate_data(db.get_session())
 
 
 # TODO: refactor

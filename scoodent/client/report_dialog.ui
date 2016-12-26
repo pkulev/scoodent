@@ -32,7 +32,7 @@
   <widget class="QGroupBox" name="groupBox">
    <property name="geometry">
     <rect>
-     <x>30</x>
+     <x>20</x>
      <y>10</y>
      <width>411</width>
      <height>290</height>
@@ -45,10 +45,10 @@
     <property name="horizontalSpacing">
      <number>6</number>
     </property>
-    <item row="5" column="0" rowspan="2">
-     <widget class="QLabel" name="_ticket_info_place">
+    <item row="3" column="1" rowspan="2">
+     <widget class="QLabel" name="lab_discipline_name">
       <property name="text">
-       <string>Place</string>
+       <string>N/A</string>
       </property>
      </widget>
     </item>
@@ -59,17 +59,55 @@
       </property>
      </widget>
     </item>
-    <item row="13" column="0">
-     <widget class="QLabel" name="_ticket_info_cost">
+    <item row="11" column="1">
+     <widget class="QLabel" name="lab_discipline_id">
       <property name="text">
-       <string>Cost</string>
+       <string>N/A</string>
       </property>
      </widget>
     </item>
-    <item row="11" column="0">
-     <widget class="QLabel" name="_ticket_info_departure_date">
+    <item row="5" column="1" rowspan="2">
+     <widget class="QLabel" name="lab_mark">
       <property name="text">
-       <string>Departure date</string>
+       <string>N/A</string>
+      </property>
+     </widget>
+    </item>
+    <item row="7" column="1" rowspan="2">
+     <widget class="QDateEdit" name="de_mark_date">
+      <property name="date">
+       <date>
+        <year>2013</year>
+        <month>1</month>
+        <day>1</day>
+       </date>
+      </property>
+      <property name="displayFormat">
+       <string>dd-MM-yyyy</string>
+      </property>
+      <property name="calendarPopup">
+       <bool>true</bool>
+      </property>
+     </widget>
+    </item>
+    <item row="7" column="0" rowspan="2">
+     <widget class="QLabel" name="_ticket_info_order_date">
+      <property name="text">
+       <string>Mark date</string>
+      </property>
+     </widget>
+    </item>
+    <item row="6" column="3" rowspan="2">
+     <widget class="QPushButton" name="pushButton_4">
+      <property name="text">
+       <string>+</string>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="0" rowspan="2">
+     <widget class="QLabel" name="_ticket_info_client">
+      <property name="text">
+       <string>Student</string>
       </property>
      </widget>
     </item>
@@ -80,27 +118,66 @@
       </property>
      </widget>
     </item>
-    <item row="13" column="1">
-     <widget class="QLabel" name="lab_cost">
+    <item row="3" column="0" rowspan="2">
+     <widget class="QLabel" name="_ticket_info_organisation">
       <property name="text">
-       <string>N/A</string>
+       <string>Discipline</string>
       </property>
      </widget>
     </item>
-    <item row="9" column="1" rowspan="2">
-     <widget class="QDateEdit" name="de_incoming_date">
-      <property name="displayFormat">
-       <string>dd-MM-yyyy</string>
+    <item row="5" column="0" rowspan="2">
+     <widget class="QLabel" name="_ticket_info_place">
+      <property name="text">
+       <string>Mark</string>
       </property>
-      <property name="calendarPopup">
-       <bool>true</bool>
+     </widget>
+    </item>
+    <item row="0" column="3" rowspan="2">
+     <widget class="QPushButton" name="pushButton">
+      <property name="text">
+       <string>+</string>
       </property>
-      <property name="date">
-       <date>
-        <year>2013</year>
-        <month>1</month>
-        <day>1</day>
-       </date>
+     </widget>
+    </item>
+    <item row="0" column="1">
+     <widget class="QLabel" name="lab_report_id">
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="1" rowspan="2">
+     <widget class="QLabel" name="lab_student">
+      <property name="text">
+       <string>TextLabel</string>
+      </property>
+     </widget>
+    </item>
+    <item row="9" column="0" rowspan="2">
+     <widget class="QLabel" name="_ticket_info_incoming_date">
+      <property name="text">
+       <string>Report type</string>
+      </property>
+     </widget>
+    </item>
+    <item row="8" column="3" rowspan="2">
+     <widget class="QPushButton" name="pushButton_5">
+      <property name="text">
+       <string>+</string>
+      </property>
+     </widget>
+    </item>
+    <item row="11" column="0">
+     <widget class="QLabel" name="_ticket_info_departure_date">
+      <property name="text">
+       <string>Discipline ID</string>
+      </property>
+     </widget>
+    </item>
+    <item row="10" column="1">
+     <widget class="QLabel" name="lab_report_type">
+      <property name="text">
+       <string>N/A</string>
       </property>
      </widget>
     </item>
@@ -114,108 +191,7 @@
     <item row="0" column="0">
      <widget class="QLabel" name="_ticket_info_id">
       <property name="text">
-       <string>Ticket №</string>
-      </property>
-     </widget>
-    </item>
-    <item row="6" column="3" rowspan="2">
-     <widget class="QPushButton" name="pushButton_4">
-      <property name="text">
-       <string>+</string>
-      </property>
-     </widget>
-    </item>
-    <item row="7" column="0" rowspan="2">
-     <widget class="QLabel" name="_ticket_info_order_date">
-      <property name="text">
-       <string>Order date</string>
-      </property>
-     </widget>
-    </item>
-    <item row="11" column="1">
-     <widget class="QDateEdit" name="de_departure_date">
-      <property name="displayFormat">
-       <string>dd-MM-yyyy</string>
-      </property>
-      <property name="calendarPopup">
-       <bool>true</bool>
-      </property>
-      <property name="date">
-       <date>
-        <year>2013</year>
-        <month>1</month>
-        <day>1</day>
-       </date>
-      </property>
-     </widget>
-    </item>
-    <item row="12" column="3">
-     <widget class="QPushButton" name="pushButton_8">
-      <property name="text">
-       <string>+</string>
-      </property>
-     </widget>
-    </item>
-    <item row="3" column="1" rowspan="2">
-     <widget class="QLabel" name="lab_organisation">
-      <property name="text">
-       <string>N/A</string>
-      </property>
-     </widget>
-    </item>
-    <item row="0" column="1">
-     <widget class="QLabel" name="lab_ticket_id">
-      <property name="text">
-       <string/>
-      </property>
-     </widget>
-    </item>
-    <item row="3" column="0" rowspan="2">
-     <widget class="QLabel" name="_ticket_info_organisation">
-      <property name="text">
-       <string>Organisation</string>
-      </property>
-     </widget>
-    </item>
-    <item row="12" column="1">
-     <widget class="QLabel" name="lab_table_num">
-      <property name="text">
-       <string>N/A</string>
-      </property>
-     </widget>
-    </item>
-    <item row="13" column="3">
-     <widget class="QPushButton" name="pushButton_9">
-      <property name="text">
-       <string>+</string>
-      </property>
-     </widget>
-    </item>
-    <item row="1" column="0" rowspan="2">
-     <widget class="QLabel" name="_ticket_info_client">
-      <property name="text">
-       <string>Client</string>
-      </property>
-     </widget>
-    </item>
-    <item row="8" column="3" rowspan="2">
-     <widget class="QPushButton" name="pushButton_5">
-      <property name="text">
-       <string>+</string>
-      </property>
-     </widget>
-    </item>
-    <item row="5" column="1" rowspan="2">
-     <widget class="QLabel" name="lab_place">
-      <property name="text">
-       <string>N/A</string>
-      </property>
-     </widget>
-    </item>
-    <item row="12" column="0">
-     <widget class="QLabel" name="_ticket_info_table_num">
-      <property name="text">
-       <string>Table number</string>
+       <string>Report ID</string>
       </property>
      </widget>
     </item>
@@ -226,45 +202,20 @@
       </property>
      </widget>
     </item>
-    <item row="9" column="0" rowspan="2">
-     <widget class="QLabel" name="_ticket_info_incoming_date">
-      <property name="text">
-       <string>Incoming date</string>
-      </property>
-     </widget>
-    </item>
-    <item row="1" column="1" rowspan="2">
-     <widget class="QLabel" name="lab_client">
-      <property name="text">
-       <string>TextLabel</string>
-      </property>
-     </widget>
-    </item>
-    <item row="7" column="1" rowspan="2">
-     <widget class="QDateEdit" name="de_order_date">
-      <property name="displayFormat">
-       <string>dd-MM-yyyy</string>
-      </property>
-      <property name="calendarPopup">
-       <bool>true</bool>
-      </property>
-      <property name="date">
-       <date>
-        <year>2013</year>
-        <month>1</month>
-        <day>1</day>
-       </date>
-      </property>
-     </widget>
-    </item>
-    <item row="0" column="3" rowspan="2">
-     <widget class="QPushButton" name="pushButton">
-      <property name="text">
-       <string>+</string>
-      </property>
-     </widget>
-    </item>
    </layout>
+  </widget>
+  <widget class="QPushButton" name="pb_add_report">
+   <property name="geometry">
+    <rect>
+     <x>40</x>
+     <y>350</y>
+     <width>94</width>
+     <height>27</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Добавить</string>
+   </property>
   </widget>
  </widget>
  <resources/>
