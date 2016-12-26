@@ -155,8 +155,8 @@ def get_groups():
     """Return groups tuple."""
 
     return (
-        ("РГУТАМИ-16-1", True),
-        ("ИТБОНСУ-16-1", True),
+        ("РГУТАМИ-16-1", False),
+        ("ИТБОНСУ-16-1", False),
         ("ГОДЗАИ-16-2", True),
         ("ИМАСУ-15-8", True)
     )

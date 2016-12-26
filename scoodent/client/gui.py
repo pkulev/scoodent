@@ -169,13 +169,13 @@ class ReportDialog(QDialog):
 
         session = db.get_session()
         report = {
-            "mark": int(self.le_mark.text()),
+            "mark": int(self.lab_mark.text()),
             "mark_date": to_datetime(self.de_mark_date.date()),
-            "report_type": str(self.le_report_type.text()),
+            "report_type": str(self.lab_report_type.text()),
             "discipline": session.query(Discipline).filter(
-                Discipline.id == int(self.le_discipline_id.text())),
+                Discipline.id == int(self.lab_discipline_id.text())),
             "student": session.query(Student).filter(
-                Student.id == int(self.le_student.text()))
+                Student.id == int(self.lab_student.text()))
         }
 
         if not all(report.values()):
@@ -193,8 +193,15 @@ class DisciplineDialog(QDialog):
         self.discipline_id = model_id
         self.pb_add_discipline.clicked.connect(self.add_discipline)
 
+        self.load_discipline_info()
+
     def load_discipline_info(self):
-        pass
+        session = db.get_session()
+        discipline = session.query(Discipline).filter(
+            Discipline.id == self.discipline_id
+        ).first()
+
+        self.le_name.setText(discipline.name)
 
     def add_discipline(self):
         """Insert new discipline to DB."""
@@ -215,13 +222,21 @@ class StudentGroupDialog(QDialog):
         self.group_id = model_id
         self.pb_add_group.clicked.connect(self.add_group)
 
+        self.load_group_info()
+
     def load_group_info(self):
-        pass
+        session = db.get_session()
+        group = session.query(StudentGroup).filter(
+            StudentGroup.id == self.group_id
+        ).first()
+
+        self.le_name.setText(group.name)
+        self.ch_fulltime.setChecked(group.fulltime)
 
     def add_group(self):
         """Insert new group to DB."""
 
-        name = str(self.le_group_name.text())
+        name = str(self.le_name.text())
         fulltime = bool(self.ch_fulltime.checked())
         if not name:
             required_field_empty_warning(self)
